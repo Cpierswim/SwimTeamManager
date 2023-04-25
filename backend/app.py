@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from database.models import db
 from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
-from resources.cars import AllCarResource, UserCarResource
+#from resources.cars import AllCarResource, UserCarResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -53,8 +53,8 @@ def create_routes():
     api = Api()
     api.add_resource(RegisterResource, '/api/auth/register')
     api.add_resource(LoginResource, '/api/auth/login')
-    api.add_resource(AllCarResource, '/api/cars')
-    api.add_resource(UserCarResource, '/api/user_cars')
+    # api.add_resource(AllCarResource, '/api/cars')
+    # api.add_resource(UserCarResource, '/api/user_cars')
     # TODO: Create files for your Resources in resources folder, add them here
     
     return api
