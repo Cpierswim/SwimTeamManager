@@ -1,4 +1,4 @@
-from flask import request
+'''from flask import request
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
 from flask_restful import Resource
 from database.models import db, Car
@@ -36,4 +36,4 @@ class UserCarResource(Resource):
         new_car.user_id = user_id
         db.session.add(new_car)
         db.session.commit()
-        return car_schema.dump(new_car), 201
+        return car_schema.dump(new_car), 201'''

@@ -1,7 +1,5 @@
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from project_enums import *
-import enum
 
 db = SQLAlchemy()
 
@@ -12,7 +10,7 @@ class User(db.Model):
     first_name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    type = db.Column(enum.Enum(UserTypeEnum), nullable=False)
+    type = db.Column(db.Integer, nullable=False)
     family_id = db.Column(db.Integer, nullable=False)
 
     def hash_password(self):
@@ -27,6 +25,7 @@ class User(db.Model):
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     team_name = db.Column(db.String(255), nullable=False)
+    abbreviation = db.Column(db.String(4), nullable=False)
 
     def __repr__(self):
         return self.team_name
@@ -38,13 +37,13 @@ class Swimmer(db.Model):
     preferred_first_name = db.Column(db.String(25), nullable=True)
     middle_name = db.Column(db.String(100), nullable=True)
     birthdate = db.Column(db.Date, nullable=False)
-    gender = db.Column(enum.Enum(GenderEnum), nullable=False)
+    gender = db.Column(db.String(1), nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'), nullable=True)
     address_id = db.Column(db.Integer, db.ForeignKey('address.id'), nullable=False)
     team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
-    team = db.Relationship("Team")
-    group = db.Relationship("Group")
-    address = db.Relationship("Address")
+    team = db.relationship("Team")
+    group = db.relationship("Group")
+    address = db.relationship("Address")
     
     def __repr__(self):
         return self.preferred_first_name + " " + self.last_name
@@ -56,17 +55,17 @@ class Parent(db.Model):
     address_id = db.Column(db.Integer, db.ForeignKey('address.id'), nullable=False)
     email = db.Column(db.String(255), nullable=False)
     phone = db.Column(db.String(12), nullable=False)
-    address = db.Relationship("Address")
+    address = db.relationship("Address")
 
     def __repr__(self):
         return "Parent: " + self.first_name + " " + self.last_name
     
 class Address(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    address_line_one = db.Column(db.String(255), nullabe=False)
+    address_line_one = db.Column(db.String(255), nullable=False)
     address_line_two = db.Column(db.String(255), nullable=True)
     city = db.Column(db.String(50), nullable=False)
-    state = db.Column(enum.Enum(StateEnum), nullable=False)
+    state = db.Column(db.String(2), nullable=False)
     zipcode = db.Column(db.String(10), nullable=False)
     latitude = db.Column(db.Float, nullable=True)
     longitude = db.Column(db.Float, nullable=True)
@@ -80,7 +79,7 @@ class Coach(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
-    team = db.Relationship("Team")
+    team = db.relationship("Team")
 
     def __repr__(self):
         return "Coach " + self.first_name + " " + self.last_name
@@ -89,7 +88,7 @@ class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     group_name = db.Column(db.String(255), nullable=False)
     team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
-    team = db.Relationship("Team")
+    team = db.relationship("Team")
 
     def __repr__(self):
         return self.group_name
@@ -109,13 +108,13 @@ class Meet(db.Model):
 class MeetEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     distance = db.Column(db.Integer, nullable=False)
-    stroke = db.Column(enum.Enum(StrokeEnum), nullable=False)
+    stroke = db.Column(db.Integer, nullable=False)
     min_age = db.Column(db.Integer, nullable=True)
     max_age = db.Column(db.Integer, nullable=True)
     meet_id = db.Column(db.Integer, db.ForeignKey('meet.id'), nullable=False)
-    event_type = db.Column(enum.Enum(EventTypeEnum), nullable=False)
+    event_type = db.Column(db.String(1), nullable=False)
     event_number = db.Column(db.Integer, nullable=False)
-    meet = db.Relationship("Meet")
+    meet = db.relationship("Meet")
 
     def __repr__(self):
         return "Meet " + self.meet_id + " " + self.distance + " " + self.stroke + " " + self.min_age + "-" + self.max_age
@@ -127,16 +126,16 @@ class Entry(db.Model):
     time = db.Column(db.Integer, nullable=True)
     exhibition = db.Column(db.Boolean, nullable=False, default=False)
     bonus = db.Column(db.Boolean, nullable=False, default=False)
-    entry_type = db.Column(enum.Enum(EventTypeEnum))
-    relay_id = db.Column(db.Iteger, db.ForeignKey('relay.id'), nullable=False)
-    relay = db.Relationship("Relay")
-    meet_event = db.Relationship("MeetEvent")
-    swimmer = db.Relationship("Swimmer")
+    entry_type = db.Column(db.String(1))
+    relay_id = db.Column(db.Integer, db.ForeignKey('relay.id'), nullable=False)
+    relay = db.relationship("Relay")
+    meet_event = db.relationship("MeetEvent")
+    swimmer = db.relationship("Swimmer")
 
     def __repr__(self):
         return self.id
 
-class Relays(db.Model):
+class Relay(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     relay_identifier = db.Column(db.String(2), nullable=False)
     swimmer1 = db.Column(db.Integer, nullable=True)
@@ -148,9 +147,9 @@ class Relays(db.Model):
     def __repr__(self):
         return self.relay_identifier
     
-class Results(db.Model):
+class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    entry_id = db.Columm(db.Integer, db.ForeignKey('meet_event.id'), nullable=False)
+    entry_id = db.Column(db.Integer, db.ForeignKey('meet_event.id'), nullable=False)
     time = db.Column(db.Integer, nullable=True)
     place = db.Column(db.Integer, nullable=True)
     points = db.Column(db.Integer, nullable=True)
@@ -159,17 +158,17 @@ class Results(db.Model):
     swimmer2 = db.Column(db.Integer, nullable=True)
     swimmer3 = db.Column(db.Integer, nullable=True)
     swimmer4 = db.Column(db.Integer, nullable=True)
-    meet_event = db.Relationship("MeetEvent")
+    meet_event = db.relationship("MeetEvent")
 
     def __repr__(self):
         return self.time
 
 class Family(db.Model):
     family_id = db.Column(db.Integer, primary_key=True)
-    parent_id = db.Column(db.Integer, db.ForeignKey("Parent"), nullable=True)
-    swimmer_id = db.Column(db.Integer, db.ForeignKey("Swimmer"), nullable=True)
-    parents = db.Relationship("Parent")
-    swimmers = db.Relationship("Swimmer")
+    parent_id = db.Column(db.Integer, db.ForeignKey("parent.id"), nullable=True)
+    swimmer_id = db.Column(db.Integer, db.ForeignKey("swimmer.id"), nullable=True)
+    parents = db.relationship("parent")
+    swimmers = db.relationship("swimmer")
 
 class GroupCoach(db.Model):
     group_id = db.Column(db.Integer, primary_key=True)
