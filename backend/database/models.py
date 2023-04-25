@@ -95,12 +95,13 @@ class Group(db.Model):
     
 class Meet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    address_id = db.Column(db.Integer, nullable=False)
+    address_id = db.Column(db.Integer, db.ForeignKey('address.id'), nullable=False)
     location_name = db.Column(db.String(255), nullable=True)
     date = db.Column(db.Date, nullable=False)
     age_up_date = db.Column(db.Date, nullable=False)
     start_time = db.Column(db.Time, nullable=True)
     name = db.Column(db.String(255), nullable=False)
+    address = db.relationship("Address")
     
     def __repr__(self):
         return self.name
@@ -126,8 +127,8 @@ class Entry(db.Model):
     time = db.Column(db.Integer, nullable=True)
     exhibition = db.Column(db.Boolean, nullable=False, default=False)
     bonus = db.Column(db.Boolean, nullable=False, default=False)
-    entry_type = db.Column(db.String(1))
-    relay_id = db.Column(db.Integer, db.ForeignKey('relay.id'), nullable=False)
+    entry_type = db.Column(db.String(1), nullable=False)
+    relay_id = db.Column(db.Integer, db.ForeignKey('relay.id'), nullable=True)
     relay = db.relationship("Relay")
     meet_event = db.relationship("MeetEvent")
     swimmer = db.relationship("Swimmer")
@@ -142,7 +143,6 @@ class Relay(db.Model):
     swimmer2 = db.Column(db.Integer, nullable=True)
     swimmer3 = db.Column(db.Integer, nullable=True)
     swimmer4 = db.Column(db.Integer, nullable=True)
-    time = db.Column(db.Integer, nullable=True)
     
     def __repr__(self):
         return self.relay_identifier
@@ -164,7 +164,8 @@ class Result(db.Model):
         return self.time
 
 class Family(db.Model):
-    family_id = db.Column(db.Integer, primary_key=True)
+    relationship_id = db.Column(db.Integer, primary_key=True)
+    family_id = db.Column(db.Integer, nullable=False)
     parent_id = db.Column(db.Integer, db.ForeignKey("parent.id"), nullable=True)
     swimmer_id = db.Column(db.Integer, db.ForeignKey("swimmer.id"), nullable=True)
     parents = db.relationship("parent")
