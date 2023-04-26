@@ -168,8 +168,8 @@ class Family(db.Model):
     family_id = db.Column(db.Integer, nullable=False)
     parent_id = db.Column(db.Integer, db.ForeignKey("parent.id"), nullable=True)
     swimmer_id = db.Column(db.Integer, db.ForeignKey("swimmer.id"), nullable=True)
-    parents = db.relationship("parent")
-    swimmers = db.relationship("swimmer")
+    parents = db.relationship("Parent")
+    swimmers = db.relationship("Swimmer")
 
 class GroupCoach(db.Model):
     group_id = db.Column(db.Integer, primary_key=True)
