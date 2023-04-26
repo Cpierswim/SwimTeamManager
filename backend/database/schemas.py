@@ -16,7 +16,7 @@ class RegisterSchema(ma.Schema):
     last_name = fields.String(required=True)
     email = fields.String(required=True)
     type = fields.Integer(required=True)
-    family_id = fields.Integer(required=True)
+    family_id = fields.Integer(required=False)
     class Meta:
         fields = ("id", "username",  "password", "first_name", "last_name", "email", "type", "family_id")
 

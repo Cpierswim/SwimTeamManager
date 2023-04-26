@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_req
 from flask_restful import Resource
 from database.models import db, Swimmer
 from database.schemas import swimmer_schema, swimmers_schema
+from marshmallow import ValidationError
 
 class SwimmerResource(Resource):
     @jwt_required()
@@ -11,8 +12,8 @@ class SwimmerResource(Resource):
             verify_jwt_in_request()
             swimmer = Swimmer.query.filter_by(swimmer_id=swimmer_id)
             return swimmer_schema.dump(swimmer), 200
-        except:
-            return "Unauthorized", 401
+        except ValidationError as err:
+            return err.messages, 400
     
     @jwt_required()
     def post(self):
@@ -23,8 +24,8 @@ class SwimmerResource(Resource):
             db.session.add(new_swimmer)
             db.session.commit()
             return swimmer_schema.dump(new_swimmer), 201
-        except:
-            return "Unauthorized", 401
+        except ValidationError as err:
+            return err.messages, 400
     
     @jwt_required()
     def put(self, swimmer_id):
@@ -53,8 +54,8 @@ class SwimmerResource(Resource):
 
             db.session.commit()
             return swimmers_schema.dump(swimmer), 200
-        except:
-            return "Unauthorized", 401
+        except ValidationError as err:
+            return err.messages, 400
         
     @jwt_required()
     def delete(self, swimmer_id):
@@ -64,8 +65,8 @@ class SwimmerResource(Resource):
             db.session.delete(swimmer)
             db.session.commit()
             return "", 204
-        except:
-            return "Unauthorized", 401
+        except ValidationError as err:
+            return err.messages, 400
 
 class SwimmersResource(Resource):
     @jwt_required()
@@ -74,5 +75,5 @@ class SwimmersResource(Resource):
             verify_jwt_in_request()
             team_swimmers = Swimmer.query.filter_by(team_id=team_id)
             return swimmers_schema.dump(team_swimmers), 200
-        except:
-            return "Unauthorized", 401
+        except ValidationError as err:
+            return err.messages, 400
