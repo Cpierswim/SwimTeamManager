@@ -10,6 +10,7 @@ from resources.auth import LoginResource, RegisterResource
 from resources.team import TeamResource, TeamsResource
 from resources.groups import GroupsResource, GroupResource
 from resources.address import AddressResource, AddressesResource
+from resources.swimmers import SwimmerResource, SwimmersResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -61,5 +62,7 @@ def create_routes():
     api.add_resource(GroupResource, '/api/group/<int:group_id>')
     api.add_resource(AddressResource, '/api/address/<int:address_id>')
     api.add_resource(AddressesResource, '/api/address/')
+    api.add_resource(SwimmerResource, '/api/swimmer/<int:swimmer_id>')
+    api.add_resource(SwimmersResource, '/api/swimmer/')
     
     return api

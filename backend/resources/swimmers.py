@@ -5,16 +5,19 @@ from database.models import db, Swimmer
 from database.schemas import swimmer_schema, swimmers_schema
 from marshmallow import ValidationError
 
-class SwimmerResource(Resource):
+class SwimmersResource(Resource):
     @jwt_required()
-    def get(self, swimmer_id):
+    def get(self):
         try:
             verify_jwt_in_request()
-            swimmer = Swimmer.query.filter_by(swimmer_id=swimmer_id)
-            return swimmer_schema.dump(swimmer), 200
+            team_id = request.args.get('team_id')
+            if (not team_id):
+                return "team_id required", 400
+            team_swimmers = Swimmer.query.filter_by(team_id=team_id)
+            return swimmers_schema.dump(team_swimmers), 200
         except ValidationError as err:
             return err.messages, 400
-    
+        
     @jwt_required()
     def post(self):
         try:
@@ -24,6 +27,16 @@ class SwimmerResource(Resource):
             db.session.add(new_swimmer)
             db.session.commit()
             return swimmer_schema.dump(new_swimmer), 201
+        except ValidationError as err:
+            return err.messages, 400
+        
+class SwimmerResource(Resource):
+    @jwt_required()
+    def get(self, swimmer_id):
+        try:
+            verify_jwt_in_request()
+            swimmer = Swimmer.query.get_or_404(swimmer_id)
+            return swimmer_schema.dump(swimmer), 200
         except ValidationError as err:
             return err.messages, 400
     
@@ -53,7 +66,7 @@ class SwimmerResource(Resource):
                 swimmer.team_id = request.json['team_id']
 
             db.session.commit()
-            return swimmers_schema.dump(swimmer), 200
+            return swimmer_schema.dump(swimmer), 200
         except ValidationError as err:
             return err.messages, 400
         
@@ -61,19 +74,9 @@ class SwimmerResource(Resource):
     def delete(self, swimmer_id):
         try:
             verify_jwt_in_request()
-            swimmer = Swimmer.get_or_404(swimmer_id)
+            swimmer = Swimmer.query.get_or_404(swimmer_id)
             db.session.delete(swimmer)
             db.session.commit()
             return "", 204
-        except ValidationError as err:
-            return err.messages, 400
-
-class SwimmersResource(Resource):
-    @jwt_required()
-    def get(self, team_id):
-        try:
-            verify_jwt_in_request()
-            team_swimmers = Swimmer.query.filter_by(team_id=team_id)
-            return swimmers_schema.dump(team_swimmers), 200
         except ValidationError as err:
             return err.messages, 400
