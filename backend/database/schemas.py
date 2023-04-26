@@ -42,28 +42,6 @@ register_schema = RegisterSchema()
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
-
-'''# Car Schemas
-class CarSchema(ma.Schema):
-    id = fields.Integer(primary_key=True)
-    make = fields.String(required=True)
-    model = fields.String(required=True)
-    year = fields.Integer()
-    user_id = fields.Integer()
-    user = ma.Nested(UserSchema, many=False)
-    class Meta:
-        fields = ("id", "make", "model", "year", "user_id", "user")
-    
-    @post_load
-    def create_car(self, data, **kwargs):
-        return Car(**data)
-
-car_schema = CarSchema()
-cars_schema = CarSchema(many=True)'''
-
-
-# TODO: Add your schemas below
-
 class TeamSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
     team_name = fields.String(required=True)
@@ -99,8 +77,8 @@ class AddressSchema(ma.Schema):
     city = fields.String(required=True)
     state = fields.String(required=True)
     zipcode = fields.String(required=True)
-    latitude = fields.Integer(required=False)
-    longitude = fields.Integer(required=False)
+    latitude = fields.Float(required=False)
+    longitude = fields.Float(required=False)
 
     class Meta:
         fields = ("id", "address_line_one", "address_line_two", "city",
