@@ -19,6 +19,7 @@ from resources.entry import EntryResource, EntriesResource
 from resources.relay import RelayResource, RelaysResource
 from resources.result import ResultResource, ResultsResource
 from resources.family import FamiliesResource, FamilyResource
+from resources.group_coach import GroupCoachResource, GroupCoachesResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -88,5 +89,7 @@ def create_routes():
     api.add_resource(ResultsResource, '/api/result/')
     api.add_resource(FamilyResource, '/api/family/<int:relationship_id>')
     api.add_resource(FamiliesResource, '/api/family/')
+    api.add_resource(GroupCoachResource, '/api/group_coach/<int:coach_id>/<int:group_id>')
+    api.add_resource(GroupCoachesResource, '/api/group_coach/')
 
     return api

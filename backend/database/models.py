@@ -161,7 +161,7 @@ class Result(db.Model):
     swimmer2 = db.Column(db.Integer, nullable=True)
     swimmer3 = db.Column(db.Integer, nullable=True)
     swimmer4 = db.Column(db.Integer, nullable=True)
-    meet_event = db.relationship("Entry")
+    meet_event = db.relationship("Entry") #TODO: Need to double check this
 
     def __repr__(self):
         return self.time
@@ -173,5 +173,7 @@ class Family(db.Model):
     swimmer_id = db.Column(db.Integer, nullable=True)
 
 class GroupCoach(db.Model):
-    group_id = db.Column(db.Integer, primary_key=True)
-    coach_id = db.Column(db.Integer, primary_key=True)
+    group_id = db.Column(db.Integer, db.ForeignKey('group.id'), primary_key=True)
+    coach_id = db.Column(db.Integer, db.ForeignKey('coach.id'), primary_key=True)
+    group = db.relationship("Group")
+    coach = db.relationship("Coach")

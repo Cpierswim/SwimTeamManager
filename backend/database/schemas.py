@@ -292,13 +292,15 @@ families_schema = FamilySchema(many=True)
 class GroupCoachSchema(ma.Schema):
     group_id = fields.Integer(primary_key=True)
     coach_id = fields.Integer(primary_key=True)
+    group = ma.Nested(GroupSchema)
+    coach = ma.Nested(CoachSchema)
 
     class Meta:
-        fields = ("group_id", "coach_id")
+        fields = ("group_id", "coach_id", "group", "coach")
 
     @post_load
     def create_group_coach(self, data, **kwargs):
         return GroupCoach(**data)
     
 group_coach_schema = GroupCoachSchema()
-group_coaches_schema = GroupCoachSchema(many = True)
+group_coaches_schema = GroupCoachSchema(many=True)
