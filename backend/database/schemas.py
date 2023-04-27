@@ -164,11 +164,13 @@ class MeetSchema(ma.Schema):
     age_up_date = fields.Date(required=True)
     start_time = fields.Time(required=False)
     name = fields.String(required=True)
+    team_id = fields.Integer(required=True)
     address = ma.Nested(AddressSchema, many=False)
+    team = ma.Nested(TeamSchema, many=False)
 
     class Meta:
         fields = ("id", "address_id", "location_name", "date", "age_up_date", 
-                  "start_time", "name", "address")
+                  "start_time", "name", "address", "team_id")
         
     @post_load
     def create_meet(self, data, **kwargs):

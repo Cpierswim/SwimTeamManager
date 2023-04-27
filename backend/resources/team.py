@@ -16,8 +16,6 @@ class TeamResource(Resource):
     
 class TeamsResource(Resource):  
     def post(self):
-        #if(form_data.secret_key == secret_key):
-        #    stop = 0
         form_data = request.get_json()
         try:
             if(form_data["secret_key"] != secret_key):

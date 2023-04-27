@@ -101,7 +101,9 @@ class Meet(db.Model):
     age_up_date = db.Column(db.Date, nullable=False)
     start_time = db.Column(db.Time, nullable=True)
     name = db.Column(db.String(255), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     address = db.relationship("Address")
+    team = db.relationship("Team")
     
     def __repr__(self):
         return self.name
