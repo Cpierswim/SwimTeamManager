@@ -11,7 +11,7 @@ class User(db.Model):
     last_name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     type = db.Column(db.Integer, nullable=False)
-    family_id = db.Column(db.Integer, nullable=False)
+    family_id = db.Column(db.Integer, nullable=True)
 
     def hash_password(self):
         self.password = generate_password_hash(self.password).decode('utf8')
@@ -101,7 +101,9 @@ class Meet(db.Model):
     age_up_date = db.Column(db.Date, nullable=False)
     start_time = db.Column(db.Time, nullable=True)
     name = db.Column(db.String(255), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     address = db.relationship("Address")
+    team = db.relationship("Team")
     
     def __repr__(self):
         return self.name
@@ -115,6 +117,7 @@ class MeetEvent(db.Model):
     meet_id = db.Column(db.Integer, db.ForeignKey('meet.id'), nullable=False)
     event_type = db.Column(db.String(1), nullable=False)
     event_number = db.Column(db.Integer, nullable=False)
+    gender = db.Column(db.String(1), nullable=False)
     meet = db.relationship("Meet")
 
     def __repr__(self):
@@ -149,7 +152,7 @@ class Relay(db.Model):
     
 class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    entry_id = db.Column(db.Integer, db.ForeignKey('meet_event.id'), nullable=False)
+    entry_id = db.Column(db.Integer, db.ForeignKey('entry.id'), nullable=False)
     time = db.Column(db.Integer, nullable=True)
     place = db.Column(db.Integer, nullable=True)
     points = db.Column(db.Integer, nullable=True)
@@ -158,7 +161,7 @@ class Result(db.Model):
     swimmer2 = db.Column(db.Integer, nullable=True)
     swimmer3 = db.Column(db.Integer, nullable=True)
     swimmer4 = db.Column(db.Integer, nullable=True)
-    meet_event = db.relationship("MeetEvent")
+    meet_event = db.relationship("Entry") #TODO: Need to double check this
 
     def __repr__(self):
         return self.time
@@ -166,11 +169,11 @@ class Result(db.Model):
 class Family(db.Model):
     relationship_id = db.Column(db.Integer, primary_key=True)
     family_id = db.Column(db.Integer, nullable=False)
-    parent_id = db.Column(db.Integer, db.ForeignKey("parent.id"), nullable=True)
-    swimmer_id = db.Column(db.Integer, db.ForeignKey("swimmer.id"), nullable=True)
-    parents = db.relationship("parent")
-    swimmers = db.relationship("swimmer")
+    parent_id = db.Column(db.Integer, nullable=True)
+    swimmer_id = db.Column(db.Integer, nullable=True)
 
 class GroupCoach(db.Model):
-    group_id = db.Column(db.Integer, primary_key=True)
-    coach_id = db.Column(db.Integer, primary_key=True)
+    group_id = db.Column(db.Integer, db.ForeignKey('group.id'), primary_key=True)
+    coach_id = db.Column(db.Integer, db.ForeignKey('coach.id'), primary_key=True)
+    group = db.relationship("Group")
+    coach = db.relationship("Coach")

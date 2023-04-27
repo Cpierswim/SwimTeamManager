@@ -16,7 +16,7 @@ class RegisterSchema(ma.Schema):
     last_name = fields.String(required=True)
     email = fields.String(required=True)
     type = fields.Integer(required=True)
-    family_id = fields.Integer(required=True)
+    family_id = fields.Integer(required=False)
     class Meta:
         fields = ("id", "username",  "password", "first_name", "last_name", "email", "type", "family_id")
 
@@ -41,28 +41,6 @@ class UserSchema(ma.Schema):
 register_schema = RegisterSchema()
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
-
-
-'''# Car Schemas
-class CarSchema(ma.Schema):
-    id = fields.Integer(primary_key=True)
-    make = fields.String(required=True)
-    model = fields.String(required=True)
-    year = fields.Integer()
-    user_id = fields.Integer()
-    user = ma.Nested(UserSchema, many=False)
-    class Meta:
-        fields = ("id", "make", "model", "year", "user_id", "user")
-    
-    @post_load
-    def create_car(self, data, **kwargs):
-        return Car(**data)
-
-car_schema = CarSchema()
-cars_schema = CarSchema(many=True)'''
-
-
-# TODO: Add your schemas below
 
 class TeamSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
@@ -99,8 +77,8 @@ class AddressSchema(ma.Schema):
     city = fields.String(required=True)
     state = fields.String(required=True)
     zipcode = fields.String(required=True)
-    latitude = fields.Integer(required=False)
-    longitude = fields.Integer(required=False)
+    latitude = fields.Float(required=False)
+    longitude = fields.Float(required=False)
 
     class Meta:
         fields = ("id", "address_line_one", "address_line_two", "city",
@@ -186,11 +164,13 @@ class MeetSchema(ma.Schema):
     age_up_date = fields.Date(required=True)
     start_time = fields.Time(required=False)
     name = fields.String(required=True)
+    team_id = fields.Integer(required=True)
     address = ma.Nested(AddressSchema, many=False)
+    team = ma.Nested(TeamSchema, many=False)
 
     class Meta:
         fields = ("id", "address_id", "location_name", "date", "age_up_date", 
-                  "start_time", "name", "address")
+                  "start_time", "name", "address", "team_id")
         
     @post_load
     def create_meet(self, data, **kwargs):
@@ -208,11 +188,13 @@ class MeetEventSchema(ma.Schema):
     meet_id = fields.Integer(required=True)
     event_type = fields.Integer(required=True)
     event_number = fields.Integer(required=True)
+    gender = fields.String(required=True)
     meet = ma.Nested(MeetSchema, many=False)
 
     class Meta:
         fields = ("id", "distance", "stroke", "min_age", "max_age", 
-                  "meet_id", "event_type", "event_number", "meet")
+                  "meet_id", "event_type", "event_number", "meet", 
+                  "gender")
         
     @post_load
     def create_meet_event(self, data, **kwargs):
@@ -285,7 +267,7 @@ class ResultSchema(ma.Schema):
         
     @post_load
     def create_result(self, data, **kwargs):
-        return Entry(**data)
+        return Result(**data)
     
 result_schema = ResultSchema()
 results_schema = ResultSchema(many=True)
@@ -295,12 +277,10 @@ class FamilySchema(ma.Schema):
     family_id = fields.Integer(required=True)
     parent_id = fields.Integer(required=False)
     swimmer_id = fields.Integer(required=False)
-    parents = ma.Nested(ParentSchema, many=True)
-    swimmers = ma.Nested(SwimmerSchema, many=True)
 
     class Meta:
-        fields = ("id", "family_id", "parent_id", "swimmer_id",
-                  "parents", "swimmers")
+        fields = ("relationship_id", "family_id", "parent_id", 
+                  "swimmer_id")
         
     @post_load
     def create_family(self, data, **kwargs):
@@ -312,13 +292,15 @@ families_schema = FamilySchema(many=True)
 class GroupCoachSchema(ma.Schema):
     group_id = fields.Integer(primary_key=True)
     coach_id = fields.Integer(primary_key=True)
+    group = ma.Nested(GroupSchema)
+    coach = ma.Nested(CoachSchema)
 
     class Meta:
-        fields = ("group_id", "coach_id")
+        fields = ("group_id", "coach_id", "group", "coach")
 
     @post_load
     def create_group_coach(self, data, **kwargs):
         return GroupCoach(**data)
     
 group_coach_schema = GroupCoachSchema()
-group_coaches_schema = GroupCoachSchema(many = True)
+group_coaches_schema = GroupCoachSchema(many=True)

@@ -7,7 +7,19 @@ from flask_migrate import Migrate
 from database.models import db
 from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
-#from resources.cars import AllCarResource, UserCarResource
+from resources.team import TeamResource, TeamsResource
+from resources.groups import GroupsResource, GroupResource
+from resources.address import AddressResource, AddressesResource
+from resources.swimmers import SwimmerResource, SwimmersResource
+from resources.parent import ParentResource, ParentsResource
+from resources.coach import CoachesResource, CoachResource
+from resources.meet import MeetResource, MeetsResource
+from resources.meetevent import MeetEventResource, MeetEventsResource
+from resources.entry import EntryResource, EntriesResource
+from resources.relay import RelayResource, RelaysResource
+from resources.result import ResultResource, ResultsResource
+from resources.family import FamiliesResource, FamilyResource
+from resources.group_coach import GroupCoachResource, GroupCoachesResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -53,8 +65,31 @@ def create_routes():
     api = Api()
     api.add_resource(RegisterResource, '/api/auth/register')
     api.add_resource(LoginResource, '/api/auth/login')
-    # api.add_resource(AllCarResource, '/api/cars')
-    # api.add_resource(UserCarResource, '/api/user_cars')
-    # TODO: Create files for your Resources in resources folder, add them here
-    
+    api.add_resource(TeamResource, '/api/team/<int:team_id>')
+    api.add_resource(TeamsResource, '/api/teams/')
+    api.add_resource(GroupsResource, '/api/groups/')
+    api.add_resource(GroupResource, '/api/group/<int:group_id>')
+    api.add_resource(AddressResource, '/api/address/<int:address_id>')
+    api.add_resource(AddressesResource, '/api/address/')
+    api.add_resource(SwimmerResource, '/api/swimmer/<int:swimmer_id>')
+    api.add_resource(SwimmersResource, '/api/swimmer/')
+    api.add_resource(ParentResource, '/api/parent/<int:parent_id>')
+    api.add_resource(ParentsResource, '/api/parent/')
+    api.add_resource(CoachResource, '/api/coach/<int:coach_id>')
+    api.add_resource(CoachesResource, '/api/coach/')
+    api.add_resource(MeetResource, '/api/meet/<int:meet_id>')
+    api.add_resource(MeetsResource, '/api/meet/')
+    api.add_resource(MeetEventResource, '/api/meetevent/<int:meetevent_id>')
+    api.add_resource(MeetEventsResource, '/api/meetevent/')
+    api.add_resource(EntryResource, '/api/entry/<int:entry_id>')
+    api.add_resource(EntriesResource, '/api/entry/')
+    api.add_resource(RelayResource, '/api/relay/<int:relay_id>')
+    api.add_resource(RelaysResource, '/api/relay/')
+    api.add_resource(ResultResource, '/api/result/<int:result_id>')
+    api.add_resource(ResultsResource, '/api/result/')
+    api.add_resource(FamilyResource, '/api/family/<int:relationship_id>')
+    api.add_resource(FamiliesResource, '/api/family/')
+    api.add_resource(GroupCoachResource, '/api/group_coach/<int:coach_id>/<int:group_id>')
+    api.add_resource(GroupCoachesResource, '/api/group_coach/')
+
     return api
