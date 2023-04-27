@@ -14,6 +14,7 @@ from resources.swimmers import SwimmerResource, SwimmersResource
 from resources.parent import ParentResource, ParentsResource
 from resources.coach import CoachesResource, CoachResource
 from resources.meet import MeetResource, MeetsResource
+from resources.meetevent import MeetEventResource, MeetEventsResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -73,5 +74,7 @@ def create_routes():
     api.add_resource(CoachesResource, '/api/coach/')
     api.add_resource(MeetResource, '/api/meet/<int:meet_id>')
     api.add_resource(MeetsResource, '/api/meet/')
+    api.add_resource(MeetEventResource, '/api/meetevent/<int:meetevent_id>')
+    api.add_resource(MeetEventsResource, '/api/meetevent/')
 
     return api

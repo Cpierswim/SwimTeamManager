@@ -117,6 +117,7 @@ class MeetEvent(db.Model):
     meet_id = db.Column(db.Integer, db.ForeignKey('meet.id'), nullable=False)
     event_type = db.Column(db.String(1), nullable=False)
     event_number = db.Column(db.Integer, nullable=False)
+    gender = db.Column(db.String(1), nullable=False)
     meet = db.relationship("Meet")
 
     def __repr__(self):

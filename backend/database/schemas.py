@@ -188,11 +188,13 @@ class MeetEventSchema(ma.Schema):
     meet_id = fields.Integer(required=True)
     event_type = fields.Integer(required=True)
     event_number = fields.Integer(required=True)
+    gender = fields.String(required=True)
     meet = ma.Nested(MeetSchema, many=False)
 
     class Meta:
         fields = ("id", "distance", "stroke", "min_age", "max_age", 
-                  "meet_id", "event_type", "event_number", "meet")
+                  "meet_id", "event_type", "event_number", "meet", 
+                  "gender")
         
     @post_load
     def create_meet_event(self, data, **kwargs):
