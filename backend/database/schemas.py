@@ -267,7 +267,7 @@ class ResultSchema(ma.Schema):
         
     @post_load
     def create_result(self, data, **kwargs):
-        return Entry(**data)
+        return Result(**data)
     
 result_schema = ResultSchema()
 results_schema = ResultSchema(many=True)
@@ -277,12 +277,10 @@ class FamilySchema(ma.Schema):
     family_id = fields.Integer(required=True)
     parent_id = fields.Integer(required=False)
     swimmer_id = fields.Integer(required=False)
-    parents = ma.Nested(ParentSchema, many=True)
-    swimmers = ma.Nested(SwimmerSchema, many=True)
 
     class Meta:
-        fields = ("id", "family_id", "parent_id", "swimmer_id",
-                  "parents", "swimmers")
+        fields = ("relationship_id", "family_id", "parent_id", 
+                  "swimmer_id")
         
     @post_load
     def create_family(self, data, **kwargs):

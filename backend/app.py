@@ -15,6 +15,10 @@ from resources.parent import ParentResource, ParentsResource
 from resources.coach import CoachesResource, CoachResource
 from resources.meet import MeetResource, MeetsResource
 from resources.meetevent import MeetEventResource, MeetEventsResource
+from resources.entry import EntryResource, EntriesResource
+from resources.relay import RelayResource, RelaysResource
+from resources.result import ResultResource, ResultsResource
+from resources.family import FamiliesResource, FamilyResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -76,5 +80,13 @@ def create_routes():
     api.add_resource(MeetsResource, '/api/meet/')
     api.add_resource(MeetEventResource, '/api/meetevent/<int:meetevent_id>')
     api.add_resource(MeetEventsResource, '/api/meetevent/')
+    api.add_resource(EntryResource, '/api/entry/<int:entry_id>')
+    api.add_resource(EntriesResource, '/api/entry/')
+    api.add_resource(RelayResource, '/api/relay/<int:relay_id>')
+    api.add_resource(RelaysResource, '/api/relay/')
+    api.add_resource(ResultResource, '/api/result/<int:result_id>')
+    api.add_resource(ResultsResource, '/api/result/')
+    api.add_resource(FamilyResource, '/api/family/<int:relationship_id>')
+    api.add_resource(FamiliesResource, '/api/family/')
 
     return api
