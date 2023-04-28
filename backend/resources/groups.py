@@ -14,7 +14,6 @@ class GroupsResource(Resource):
     @jwt_required()
     def get(self):
         try:
-            verify_jwt_in_request()
             team_id = request.args.get('team_id')
             if (not team_id):
                 return "team_id required", 400

@@ -15,25 +15,28 @@ const HomePage = () => {
   const PARENT_TYPE = 1;
   const COACH_TYPE = 2;
 
-  useEffect(async () => {
-    if (user.type === PARENT_TYPE) {
-      let url = `${BASE_URL}/family?family_id=${user.family_id}/`;
-      let response = await axios.get(
-        url
-        // {
-        //   headers: {
-        //     Authorization: "Bearer " + token,
-        //   },
-        // }
-      );
-      setParents(response.data.parents);
-      setSwimmers(response.data.swimmers);
-    } else if (user.type === COACH_TYPE) {
-      let url = `${BASE_URL}/coach/${user.coach_id}`;
-      debugger;
-      let response = await axios.get(url);
-      setCoach(response.data);
-    }
+  useEffect(() => {
+    const fetchFamily = async () => {
+      if (user.type === PARENT_TYPE) {
+        let url = `${BASE_URL}/family?family_id=${user.family_id}/`;
+        let response = await axios.get(
+          url
+          // {
+          //   headers: {
+          //     Authorization: "Bearer " + token,
+          //   },
+          // }
+        );
+        setParents(response.data.parents);
+        setSwimmers(response.data.swimmers);
+      } else if (user.type === COACH_TYPE) {
+        let url = `${BASE_URL}/coach/${user.coach_id}`;
+        debugger;
+        let response = await axios.get(url);
+        setCoach(response.data);
+      }
+    };
+    fetchFamily();
   }, []);
 
   const loggedInUser = () => {

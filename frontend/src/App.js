@@ -6,6 +6,8 @@ import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import RegisterCoach from "./pages/RegisterCoach/RegisterCoach";
+import GroupsPage from "./pages/GroupsPage/GroupsPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -24,6 +26,22 @@ function App() {
           element={
             <PrivateRoute>
               <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/register_coach"
+          element={
+            <PrivateRoute>
+              <RegisterCoach />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/groups"
+          element={
+            <PrivateRoute>
+              <GroupsPage />
             </PrivateRoute>
           }
         />
