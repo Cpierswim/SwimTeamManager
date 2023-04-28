@@ -6,11 +6,15 @@ import axios from "axios";
 const HomePage = () => {
   const [user, token] = useAuth();
 
+  const loggedInUser = () => {
+    return <h1>Home Page for {user.username}!</h1>;
+  };
+
+  const anonymousUser = () => {
+    return <h1>JCC Stingrays</h1>;
+  };
   return (
-    <div className="container">
-      {console.log(user)}
-      <h1>Home Page for {user.username}!</h1>
-    </div>
+    <div className="container">{user ? loggedInUser() : anonymousUser()}</div>
   );
 };
 
