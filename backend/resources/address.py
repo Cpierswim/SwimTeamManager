@@ -21,10 +21,8 @@ def getLatLongFromGoogleAPIData(data):
     return lat, long
 
 class AddressesResource(Resource):
-    @jwt_required()
     def post(self):
         try:
-            verify_jwt_in_request()
             form_data = request.get_json()
             url = f"https://maps.googleapis.com/maps/api/geocode/json?address={form_data['address_line_one']} {form_data['address_line_two']} "
             url = url + f"{form_data['city']}, {form_data['state']} {form_data['zipcode']}&key={GOOGLE_MAPS_API_KEY}"

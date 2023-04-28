@@ -41,6 +41,7 @@ class Swimmer(db.Model):
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'), nullable=True)
     address_id = db.Column(db.Integer, db.ForeignKey('address.id'), nullable=False)
     team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    family_id = db.Column(db.Integer, nullable=False)
     team = db.relationship("Team")
     group = db.relationship("Group")
     address = db.relationship("Address")
@@ -55,6 +56,7 @@ class Parent(db.Model):
     address_id = db.Column(db.Integer, db.ForeignKey('address.id'), nullable=False)
     email = db.Column(db.String(255), nullable=False)
     phone = db.Column(db.String(12), nullable=False)
+    family_id = db.Column(db.Integer, nullable=False)
     address = db.relationship("Address")
 
     def __repr__(self):
@@ -177,3 +179,7 @@ class GroupCoach(db.Model):
     coach_id = db.Column(db.Integer, db.ForeignKey('coach.id'), primary_key=True)
     group = db.relationship("Group")
     coach = db.relationship("Coach")
+
+class LastFamilyID(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    last_family_id = db.Column(db.Integer, nullable=False)

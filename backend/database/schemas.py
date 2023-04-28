@@ -102,6 +102,7 @@ class SwimmerSchema(ma.Schema):
     group_id = fields.Integer(required=False)
     address_id = fields.Integer(required=True)
     team_id = fields.Integer(required=True)
+    family_id = fields.Integer(required=True)
     group = ma.Nested(GroupSchema, many=False)
     team = ma.Nested(TeamSchema, many=False)
     addresses = ma.Nested(AddressSchema, many=True)
@@ -109,7 +110,7 @@ class SwimmerSchema(ma.Schema):
     class Meta:
         fields = ("id", "first_name", "last_name", "preferred_first_name", 
                   "middle_name", "birthdate", "gender", "group_id", 
-                  "address_id", "team_id", "group", "team", "addresses")
+                  "address_id", "team_id", "group", "team", "addresses", "family_id")
         
     @post_load
     def create_swimmer(self, data, **kwargs):
@@ -125,11 +126,12 @@ class ParentSchema(ma.Schema):
     address_id = fields.Integer(required=True)
     email = fields.String(required=True)
     phone = fields.String(required=True)
+    family_id = fields.Integer(required=True)
     address = ma.Nested(AddressSchema, many=False)
 
     class Meta:
         fields = ("id", "last_name", "first_name", "address_id", "email", 
-                  "phone", "address")
+                  "phone", "address", "family_id")
 
     @post_load
     def create_parent(self, data, **kwargs):
@@ -304,3 +306,12 @@ class GroupCoachSchema(ma.Schema):
     
 group_coach_schema = GroupCoachSchema()
 group_coaches_schema = GroupCoachSchema(many=True)
+
+class LastFamilyIDSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    last_family_id = fields.Integer(required=True)
+
+    class Meta:
+        fields = ["last_family_id"]
+
+last_family_id_schema = LastFamilyIDSchema()
