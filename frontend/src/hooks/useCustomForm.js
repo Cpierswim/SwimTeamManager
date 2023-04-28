@@ -12,9 +12,9 @@ const useCustomForm = (initialValues = {}, onSubmit) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, swimmers) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit(formData, swimmers);
   };
 
   const reset = () => {

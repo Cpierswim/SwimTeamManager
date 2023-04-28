@@ -46,14 +46,9 @@ const Navbar = () => {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link disabled" href="#">
+            <Link className="nav-link" to="/login">
               Login
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link disabled" href="#">
-              Logout
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

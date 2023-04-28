@@ -27,16 +27,32 @@ export const AuthProvider = ({ children }) => {
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
 
-  const registerUser = async (registerData) => {
+  const registerUser = async (registerData, swimmers) => {
     try {
-      let finalData = {
+      let finalUserData = {
         username: registerData.username,
         password: registerData.password,
         email: registerData.email,
         first_name: registerData.firstName,
         last_name: registerData.lastName,
+        type: registerData.type,
+        address: {
+          address_line_one: registerData.address_line_one,
+          address_line_two: registerData.address_line_two,
+          city: registerData.city,
+          state: registerData.state,
+          zipcode: registerData.zipcode,
+        },
+        parent: {
+          last_name: registerData.lastName,
+          first_name: registerData.firstName,
+          email: registerData.email,
+          phone: registerData.phone,
+        },
+        swimmers: swimmers,
       };
-      let response = await axios.post(`${BASE_URL}/register`, finalData);
+      debugger;
+      let response = await axios.post(`${BASE_URL}/register`, finalUserData);
       if (response.status === 201) {
         console.log("Successful registration! Log in to access token");
         setIsServerError(false);

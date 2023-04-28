@@ -6,10 +6,8 @@ from database.schemas import parent_schema, parents_schema
 from marshmallow import ValidationError
 
 class ParentsResource(Resource):
-    @jwt_required()
     def post(self):
         try:
-            verify_jwt_in_request()
             form_data = request.get_json()
             new_parent = parent_schema.load(form_data)
             db.session.add(new_parent)
