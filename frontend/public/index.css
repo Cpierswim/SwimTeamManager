@@ -1,0 +1,10 @@
+html {
+  background: url("swimmer_background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0px;
+  max-width: 100%;
+}
+
+body {
+  margin: 0px;
+}
