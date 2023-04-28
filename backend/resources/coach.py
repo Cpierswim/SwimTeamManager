@@ -31,10 +31,10 @@ class CoachesResource(Resource):
             return err.messages, 400
         
 class CoachResource(Resource):
-    @jwt_required()
+
     def get(self, coach_id):
         try:
-            verify_jwt_in_request()
+            #verify_jwt_in_request()
             coach = Coach.query.get_or_404(coach_id)
             return coach_schema.dump(coach), 200
         except ValidationError as err:

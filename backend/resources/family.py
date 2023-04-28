@@ -18,10 +18,9 @@ class FamiliesResource(Resource):
         except ValidationError as err:
             return err.messages, 400
         
-    @jwt_required()
+    #@jwt_required()
     def get(self):
         try:
-            verify_jwt_in_request()
             family_id = request.args.get('family_id')
             if(not family_id):
                 return "family_id required", 400

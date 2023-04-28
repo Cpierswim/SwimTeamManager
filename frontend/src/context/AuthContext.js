@@ -15,6 +15,9 @@ function setUserObject(user) {
     username: user.username,
     id: user.id,
     first_name: user.first_name,
+    family_id: user.family_id,
+    type: user.type,
+    coach_id: user.coach_id,
   };
 }
 
