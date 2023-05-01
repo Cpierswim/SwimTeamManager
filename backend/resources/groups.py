@@ -11,7 +11,6 @@ load_dotenv()
 secret_key = environ.get('GOOGLE_MAPS_API_KEY')
 
 class GroupsResource(Resource):
-    @jwt_required()
     def get(self):
         try:
             team_id = request.args.get('team_id')
@@ -25,7 +24,7 @@ class GroupsResource(Resource):
     @jwt_required()
     def post(self):
         try:
-            verify_jwt_in_request()
+            # verify_jwt_in_request()
             form_data = request.get_json()
             new_group = group_schema.load(form_data)
             db.session.add(new_group)
