@@ -53,9 +53,14 @@ const HomePage = () => {
     return (
       <>
         {coach.isHeadCoach && (
-          <Link className="nav-link" to="/register_coach">
-            Add Coach
-          </Link>
+          <>
+            <Link className="nav-link" to="/register_coach">
+              Add Coach
+            </Link>
+            <Link className="nav-link" to="/swimmersgroups">
+              Assign Swimmers to Groups
+            </Link>
+          </>
         )}
       </>
     );

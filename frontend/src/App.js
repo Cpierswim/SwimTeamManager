@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import RegisterCoachPage from "./pages/RegisterCoachPage/RegisterCoachPage";
 import GroupsPage from "./pages/GroupsPage/GroupsPage";
+import SwimmerGroupsPage from "./pages/SwimmerGroupsPage/SwimmerGroupsPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -42,6 +43,14 @@ function App() {
           element={
             <PrivateRoute>
               <GroupsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/swimmersgroups"
+          element={
+            <PrivateRoute>
+              <SwimmerGroupsPage />
             </PrivateRoute>
           }
         />
