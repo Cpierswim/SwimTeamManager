@@ -2,7 +2,7 @@ from flask import request
 from flask_jwt_extended import create_access_token
 from flask_restful import Resource
 from database.models import db, User, LastFamilyID, Address
-from database.schemas import register_schema, user_schema, last_family_id_schema, address_schema, parent_schema, swimmer_schema, coach_schema
+from database.schemas import register_schema, user_schema, last_family_id_schema, address_schema, parent_schema, swimmer_schema, coach_schema, group_coach_schema
 from marshmallow import ValidationError
 import datetime
 import json
@@ -45,7 +45,8 @@ class RegisterResource(Resource):
                 new_user = register_schema.load(registration_data)
                 new_user.hash_password()
                 db.session.add(new_user)
-            # Now add the address
+
+                # Now add the address
                 address = form_data['address']
                 url = f"https://maps.googleapis.com/maps/api/geocode/json?address={address['address_line_one']} {address['address_line_two']} "
                 url = url + f"{address['city']}, {address['state']} {address['zipcode']}&key={GOOGLE_MAPS_API_KEY}"
@@ -93,7 +94,7 @@ class RegisterResource(Resource):
                 }
                 new_coach = coach_schema.load(coach)
                 db.session.add(new_coach)
-
+                db.session.commit()
                 #Now that we have the coach_id - we can register the user
                 registration_data = {
                     'username': form_data['username'],
@@ -102,12 +103,21 @@ class RegisterResource(Resource):
                     'first_name': form_data['first_name'],
                     'last_name': form_data['last_name'],
                     'type': form_data['type'],
-                    'coach_id': new_coach['id']
+                    'coach_id': new_coach.id
                 }
                 new_user = register_schema.load(registration_data)
                 new_user.hash_password()
                 db.session.add(new_user)
 
+                #TODO: add each group into the groupCoach table
+                groups = form_data['groups']
+                for group in groups:
+                    group_coach = {
+                        'group_id': group,
+                        'coach_id': new_coach.id
+                    }
+                    new_group_coach = group_coach_schema.load(group_coach)
+                    db.session.add(new_group_coach)
                 db.session.commit()
                 return coach_schema.dump(new_coach), 201
         except ValidationError as err:

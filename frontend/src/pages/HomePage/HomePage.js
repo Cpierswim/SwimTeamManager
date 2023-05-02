@@ -31,7 +31,6 @@ const HomePage = () => {
         setSwimmers(response.data.swimmers);
       } else if (user.type === COACH_TYPE) {
         let url = `${BASE_URL}/coach/${user.coach_id}`;
-        debugger;
         let response = await axios.get(url);
         setCoach(response.data);
       }

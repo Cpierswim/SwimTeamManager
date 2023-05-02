@@ -6,7 +6,7 @@ import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import RegisterCoach from "./pages/RegisterCoach/RegisterCoach";
+import RegisterCoachPage from "./pages/RegisterCoachPage/RegisterCoachPage";
 import GroupsPage from "./pages/GroupsPage/GroupsPage";
 
 // Component Imports
@@ -33,7 +33,7 @@ function App() {
           path="/register_coach"
           element={
             <PrivateRoute>
-              <RegisterCoach />
+              <RegisterCoachPage />
             </PrivateRoute>
           }
         />

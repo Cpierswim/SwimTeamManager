@@ -4,17 +4,14 @@ const useCustomForm = (initialValues = {}, onSubmit) => {
   const [formData, setFormValues] = useState(initialValues);
 
   const handleInputChange = (e) => {
-    e.persist();
-    if (e.target.name === "isStudent") {
+    if (e.target.type === "checkbox")
       setFormValues({ ...formData, [e.target.name]: e.target.checked });
-    } else {
-      setFormValues({ ...formData, [e.target.name]: e.target.value });
-    }
+    else setFormValues({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e, swimmers) => {
+  const handleSubmit = (e, swimmers = []) => {
     e.preventDefault();
-    onSubmit(formData, swimmers);
+    onSubmit(formData, (swimmers = []));
   };
 
   const reset = () => {
