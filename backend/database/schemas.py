@@ -17,8 +17,10 @@ class RegisterSchema(ma.Schema):
     email = fields.String(required=True)
     type = fields.Integer(required=True)
     family_id = fields.Integer(required=False)
+    coach_id = fields.Integer(required=False)
     class Meta:
-        fields = ("id", "username",  "password", "first_name", "last_name", "email", "type", "family_id")
+        fields = ("id", "username",  "password", "first_name", "last_name", 
+                  "email", "type", "family_id", "coach_id")
 
     @post_load
     def create_user(self, data, **kwargs):
@@ -34,9 +36,10 @@ class UserSchema(ma.Schema):
     last_name = fields.String(required=True)
     email = fields.String(required=True)
     type = fields.Integer(required=True)
-    family_id = fields.Integer(required=True)
+    family_id = fields.Integer(required=False)
+    coach_id = fields.Integer(required=False)
     class Meta:
-        fields = ("id", "username", "first_name", "last_name", "email",)
+        fields = ("id", "username", "first_name", "last_name", "email", "type", "family_id", "coach_id")
 
 register_schema = RegisterSchema()
 user_schema = UserSchema()

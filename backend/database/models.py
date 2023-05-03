@@ -12,6 +12,7 @@ class User(db.Model):
     email = db.Column(db.String(255), nullable=False, unique=True)
     type = db.Column(db.Integer, nullable=False)
     family_id = db.Column(db.Integer, nullable=True)
+    coach_id = db.Column(db.Integer, nullable=True)
 
     def hash_password(self):
         self.password = generate_password_hash(self.password).decode('utf8')

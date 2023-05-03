@@ -1,8 +1,8 @@
 from flask import request
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
 from flask_restful import Resource
-from database.models import db, Family
-from database.schemas import families_schema, family_schema
+from database.models import db, Family, Swimmer, Parent
+from database.schemas import families_schema, family_schema, swimmers_schema, parents_schema
 from marshmallow import ValidationError
 
 class FamiliesResource(Resource):
@@ -18,26 +18,23 @@ class FamiliesResource(Resource):
         except ValidationError as err:
             return err.messages, 400
         
-    @jwt_required()
+    #@jwt_required()
     def get(self):
         try:
-            verify_jwt_in_request()
             family_id = request.args.get('family_id')
             if(not family_id):
                 return "family_id required", 400
-            relationships = Family.query.filter_by(family_id=family_id)
-            parents = []
-            swimmers = []
-            for relationship in relationships:
-                if(relationship.parent_id):
-                    parents.append(relationship.parent_id)
-                if(relationship.swimmer_id):
-                    swimmers.append(relationship.swimmer_id)
+            
+            swimmers = Swimmer.query.filter_by(family_id=family_id)
+            parents = Parent.query.filter_by(family_id=family_id)
+            swimmers = swimmers_schema.dump(swimmers)
+            parents = parents_schema.dump(parents)
+            return_info = {
+                'parents': parents,
+                'swimmers': swimmers
+            }
 
-            return_object = {"parents": parents,
-                             "swimmers": swimmers}
-
-            return return_object, 200
+            return return_info, 200
         except ValidationError as err:
             return err.messages, 400
         

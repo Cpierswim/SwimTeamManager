@@ -46,9 +46,11 @@ const Navbar = () => {
             </a>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/login">
-              Login
-            </Link>
+            {user ? (
+              <button onClick={logoutUser}>Logout</button>
+            ) : (
+              <button onClick={() => navigate("/login")}>Login</button>
+            )}
           </li>
         </ul>
       </div>
