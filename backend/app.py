@@ -17,7 +17,7 @@ from resources.meet import MeetResource, MeetsResource
 from resources.meetevent import MeetEventResource, MeetEventsResource
 from resources.entry import EntryResource, EntriesResource
 from resources.relay import RelayResource, RelaysResource
-from resources.result import ResultResource, ResultsResource
+from resources.result import ResultResource, ResultsResource, SwimmerBestTimesResource, TeamBestTimeResource
 from resources.family import FamiliesResource, FamilyResource
 from resources.group_coach import GroupCoachResource, GroupCoachesResource
 from resources.last_family_id import LastFamilyIDResource
@@ -93,5 +93,7 @@ def create_routes():
     api.add_resource(GroupCoachResource, '/api/group_coach/<int:coach_id>/<int:group_id>')
     api.add_resource(GroupCoachesResource, '/api/group_coach')
     api.add_resource(LastFamilyIDResource, '/api/familyID')
+    api.add_resource(SwimmerBestTimesResource, '/api/besttimes/<int:swimmer_id>')
+    api.add_resource(TeamBestTimeResource, '/api/besttimes')
 
     return api

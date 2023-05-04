@@ -155,7 +155,7 @@ class Relay(db.Model):
     
 class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    entry_id = db.Column(db.Integer, db.ForeignKey('entry.id'), nullable=False)
+    entry_id = db.Column(db.Integer, nullable=True)
     time = db.Column(db.Integer, nullable=True)
     place = db.Column(db.Integer, nullable=True)
     points = db.Column(db.Integer, nullable=True)
@@ -164,7 +164,8 @@ class Result(db.Model):
     swimmer2 = db.Column(db.Integer, nullable=True)
     swimmer3 = db.Column(db.Integer, nullable=True)
     swimmer4 = db.Column(db.Integer, nullable=True)
-    meet_event = db.relationship("Entry") #TODO: Need to double check this
+    distance = db.Column(db.Integer, nullable=False)
+    stroke = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return self.time

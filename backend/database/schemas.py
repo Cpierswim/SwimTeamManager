@@ -108,12 +108,12 @@ class SwimmerSchema(ma.Schema):
     family_id = fields.Integer(required=True)
     group = ma.Nested(GroupSchema, many=False)
     team = ma.Nested(TeamSchema, many=False)
-    addresses = ma.Nested(AddressSchema, many=True)
+    address = ma.Nested(AddressSchema, many=False)
 
     class Meta:
         fields = ("id", "first_name", "last_name", "preferred_first_name", 
-                  "middle_name", "birthdate", "gender", "group_id", 
-                  "address_id", "team_id", "group", "team", "addresses", "family_id")
+                  "middle_name", "birthdate", "gender", "group_id", "address_id",
+                  "team_id", "group", "team", "address", "family_id")
         
     @post_load
     def create_swimmer(self, data, **kwargs):
@@ -254,7 +254,7 @@ entries_schema = EntrySchema(many=True)
 
 class ResultSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
-    entry_id = fields.Integer(required=True)
+    entry_id = fields.Integer(required=False)
     time = fields.Integer(required=False)
     place = fields.Integer(required=False)
     points = fields.Integer(required=False)
@@ -264,11 +264,14 @@ class ResultSchema(ma.Schema):
     swimmer3 = fields.Integer(required=False)
     swimmer4 = fields.Integer(required=False)
     meet_event = ma.Nested(MeetEventSchema, many=False)
+    distance = fields.Integer(required=True)
+    stroke = fields.Integer(required=True)
+
 
     class Meta:
         fields = ("id", "entry_id", "time", "place", "points", "DQCode", 
                   "swimmer1", "swimmer2", "swimmer3", "swimmer4", 
-                  "meet_event")
+                  "meet_event", "distance", "stroke")
         
     @post_load
     def create_result(self, data, **kwargs):

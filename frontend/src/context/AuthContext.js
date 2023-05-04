@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
         },
         swimmers: swimmers,
       };
-      debugger;
+      // debugger;
       let response = await axios.post(`${BASE_URL}/register`, finalUserData);
       if (response.status === 201) {
         console.log("Successful registration! Log in to access token");
@@ -74,6 +74,8 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 200) {
         localStorage.setItem("token", JSON.stringify(response.data.access));
         setToken(JSON.parse(localStorage.getItem("token")));
+        debugger;
+        let temp_token = localStorage.getItem("token");
         let loggedInUser = jwtDecode(response.data.access);
         setUser(setUserObject(loggedInUser));
         setIsServerError(false);
