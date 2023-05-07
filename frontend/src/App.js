@@ -9,6 +9,12 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import RegisterCoachPage from "./pages/RegisterCoachPage/RegisterCoachPage";
 import GroupsPage from "./pages/GroupsPage/GroupsPage";
 import SwimmerGroupsPage from "./pages/SwimmerGroupsPage/SwimmerGroupsPage";
+import MapPage from "./pages/MapPage/MapPage";
+import MeetSignupPage from "./pages/MeetSignupPage/MeetSignupPage";
+import ResultsPage from "./pages/ResultsPage/ResultsPage";
+import PickEventsPage from "./pages/PickEventsPage/PickEventsPage";
+import PickEventsForMeetPage from "./pages/PickEventsForMeetPage/PickEventsForMeetPage";
+import RelayPickerPage from "./pages/RelayPickerPage/RelayPickerPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -51,6 +57,54 @@ function App() {
           element={
             <PrivateRoute>
               <SwimmerGroupsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/map"
+          element={
+            <PrivateRoute>
+              <MapPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/meetsignup"
+          element={
+            <PrivateRoute>
+              <MeetSignupPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/results"
+          element={
+            <PrivateRoute>
+              <ResultsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/selectmeet"
+          element={
+            <PrivateRoute>
+              <PickEventsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/selectformeet"
+          element={
+            <PrivateRoute>
+              <PickEventsForMeetPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/relays"
+          element={
+            <PrivateRoute>
+              <RelayPickerPage />
             </PrivateRoute>
           }
         />

@@ -1,9 +1,12 @@
 from flask import request
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
 from flask_restful import Resource
-from database.models import db, Swimmer
-from database.schemas import swimmer_schema, swimmers_schema
+from database.models import db, Swimmer, Result
+from database.schemas import swimmer_schema, swimmers_schema, results_schema
 from marshmallow import ValidationError
+
+
+
 
 class SwimmersResource(Resource):
     def get(self):
@@ -16,10 +19,10 @@ class SwimmersResource(Resource):
         except ValidationError as err:
             return err.messages, 400
         
-    @jwt_required()
+    # @jwt_required()
     def post(self):
         try:
-            verify_jwt_in_request()
+            # verify_jwt_in_request()
             form_data = request.get_json()
             new_swimmer = swimmer_schema.load(form_data)
             db.session.add(new_swimmer)
@@ -78,3 +81,4 @@ class SwimmerResource(Resource):
             return "", 204
         except ValidationError as err:
             return err.messages, 400
+        

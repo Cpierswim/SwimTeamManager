@@ -11,7 +11,7 @@ const useCustomForm = (initialValues = {}, onSubmit) => {
 
   const handleSubmit = (e, swimmers = []) => {
     e.preventDefault();
-    onSubmit(formData, (swimmers = []));
+    onSubmit(formData, swimmers);
   };
 
   const reset = () => {

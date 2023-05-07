@@ -17,7 +17,7 @@ const RegisterPage = () => {
   const [swimmerMiddleName, setSwimmerMiddleName] = useState("");
   const [swimmerLastName, setSwimmerLastName] = useState("");
   const [birthdate, setBirthdate] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("F");
   const defaultValues = {
     username: "",
     email: "",

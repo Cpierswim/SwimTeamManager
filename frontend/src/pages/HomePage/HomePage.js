@@ -54,11 +54,20 @@ const HomePage = () => {
       <>
         {coach.isHeadCoach && (
           <>
+            <Link className="nav-link" to="/groups">
+              Add Groups
+            </Link>
             <Link className="nav-link" to="/register_coach">
               Add Coach
             </Link>
             <Link className="nav-link" to="/swimmersgroups">
               Assign Swimmers to Groups
+            </Link>
+            <Link className="nav-link" to="/map">
+              Map of all Swimmers
+            </Link>
+            <Link className="nav-link" to="/selectmeet">
+              Pick Swimmer's Events
             </Link>
           </>
         )}

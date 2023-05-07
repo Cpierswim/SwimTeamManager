@@ -108,12 +108,12 @@ class SwimmerSchema(ma.Schema):
     family_id = fields.Integer(required=True)
     group = ma.Nested(GroupSchema, many=False)
     team = ma.Nested(TeamSchema, many=False)
-    addresses = ma.Nested(AddressSchema, many=True)
+    address = ma.Nested(AddressSchema, many=False)
 
     class Meta:
         fields = ("id", "first_name", "last_name", "preferred_first_name", 
-                  "middle_name", "birthdate", "gender", "group_id", 
-                  "address_id", "team_id", "group", "team", "addresses", "family_id")
+                  "middle_name", "birthdate", "gender", "group_id", "address_id",
+                  "team_id", "group", "team", "address", "family_id")
         
     @post_load
     def create_swimmer(self, data, **kwargs):
@@ -215,10 +215,11 @@ class RelaySchema(ma.Schema):
     swimmer2 = fields.Integer(required=False)
     swimmer3 = fields.Integer(required=False)
     swimmer4 = fields.Integer(required=False)
+    time = fields.Integer(required=False)
 
     class Meta:
         fields = ("id", "relay_identifier", "swimmer1", "swimmer2", 
-                  "swimmer3", "swimmer4")
+                  "swimmer3", "swimmer4", "time")
         
     @post_load
     def create_relay(self, data, **kwargs):
@@ -254,7 +255,7 @@ entries_schema = EntrySchema(many=True)
 
 class ResultSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
-    entry_id = fields.Integer(required=True)
+    entry_id = fields.Integer(required=False)
     time = fields.Integer(required=False)
     place = fields.Integer(required=False)
     points = fields.Integer(required=False)
@@ -264,11 +265,15 @@ class ResultSchema(ma.Schema):
     swimmer3 = fields.Integer(required=False)
     swimmer4 = fields.Integer(required=False)
     meet_event = ma.Nested(MeetEventSchema, many=False)
+    distance = fields.Integer(required=True)
+    stroke = fields.Integer(required=True)
+    meet_id = fields.Integer(required=False)
+
 
     class Meta:
         fields = ("id", "entry_id", "time", "place", "points", "DQCode", 
                   "swimmer1", "swimmer2", "swimmer3", "swimmer4", 
-                  "meet_event")
+                  "meet_event", "distance", "stroke", "meet_id")
         
     @post_load
     def create_result(self, data, **kwargs):
@@ -318,3 +323,25 @@ class LastFamilyIDSchema(ma.Schema):
         fields = ["last_family_id"]
 
 last_family_id_schema = LastFamilyIDSchema()
+
+class MeetSignupSchema(ma.Schema):
+    swimmer_id = fields.Integer(primary_key=True)
+    meet_id = fields.Integer(primary_key=True)
+
+    class Meta:
+        fields = ("swimmer_id", "meet_id")
+
+    @post_load
+    def create_meet_signup(self, data, **kwargs):
+        return MeetSignup(**data)
+
+meet_signup_schema = MeetSignupSchema()
+meet_signups_schema = MeetSignupSchema(many=True)
+
+class Environment(ma.Schema):
+    key = fields.String(primary_key=True)
+    value = fields.String(required=False)
+
+    class Meta:
+        fields = ('key', 'value')
+        

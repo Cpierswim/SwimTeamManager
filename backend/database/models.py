@@ -149,13 +149,14 @@ class Relay(db.Model):
     swimmer2 = db.Column(db.Integer, nullable=True)
     swimmer3 = db.Column(db.Integer, nullable=True)
     swimmer4 = db.Column(db.Integer, nullable=True)
+    time = db.Column(db.Integer, nullable=True)
     
     def __repr__(self):
         return self.relay_identifier
     
 class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    entry_id = db.Column(db.Integer, db.ForeignKey('entry.id'), nullable=False)
+    entry_id = db.Column(db.Integer, nullable=True)
     time = db.Column(db.Integer, nullable=True)
     place = db.Column(db.Integer, nullable=True)
     points = db.Column(db.Integer, nullable=True)
@@ -164,7 +165,9 @@ class Result(db.Model):
     swimmer2 = db.Column(db.Integer, nullable=True)
     swimmer3 = db.Column(db.Integer, nullable=True)
     swimmer4 = db.Column(db.Integer, nullable=True)
-    meet_event = db.relationship("Entry") #TODO: Need to double check this
+    distance = db.Column(db.Integer, nullable=False)
+    stroke = db.Column(db.Integer, nullable=False) 
+    meet_id = db.Column(db.Integer, nullable=True)
 
     def __repr__(self):
         return self.time
@@ -184,3 +187,11 @@ class GroupCoach(db.Model):
 class LastFamilyID(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     last_family_id = db.Column(db.Integer, nullable=False)
+
+class MeetSignup(db.Model):
+    swimmer_id = db.Column(db.Integer, primary_key=True)
+    meet_id = db.Column(db.Integer, primary_key=True)
+
+class Environment(db.Model):
+    key = db.Column(db.String(255), primary_key=True)
+    value = db.Column(db.String(255), nullable=True)

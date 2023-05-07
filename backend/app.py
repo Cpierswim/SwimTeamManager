@@ -15,12 +15,14 @@ from resources.parent import ParentResource, ParentsResource
 from resources.coach import CoachesResource, CoachResource
 from resources.meet import MeetResource, MeetsResource
 from resources.meetevent import MeetEventResource, MeetEventsResource
-from resources.entry import EntryResource, EntriesResource
+from resources.entry import EntryResource, EntriesResource, EntryWorkAroundResource
 from resources.relay import RelayResource, RelaysResource
-from resources.result import ResultResource, ResultsResource
+from resources.result import ResultResource, ResultsResource, SwimmerBestTimesResource, TeamBestTimeResource
 from resources.family import FamiliesResource, FamilyResource
 from resources.group_coach import GroupCoachResource, GroupCoachesResource
 from resources.last_family_id import LastFamilyIDResource
+from resources.meetsignup import MeetSignupResource, MeetSignupsResource, AddMeetSignupResource, MeetSignupsByMeetResource
+from resources.environment import EnvironmentResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -93,5 +95,13 @@ def create_routes():
     api.add_resource(GroupCoachResource, '/api/group_coach/<int:coach_id>/<int:group_id>')
     api.add_resource(GroupCoachesResource, '/api/group_coach')
     api.add_resource(LastFamilyIDResource, '/api/familyID')
+    api.add_resource(SwimmerBestTimesResource, '/api/besttimes/<int:swimmer_id>')
+    api.add_resource(TeamBestTimeResource, '/api/besttimes')
+    api.add_resource(MeetSignupsResource, '/api/signups/<int:swimmer_id>')
+    api.add_resource(MeetSignupResource, '/api/signups/<int:swimmer_id>/<int:meet_id>')
+    api.add_resource(AddMeetSignupResource, '/api/signups')
+    api.add_resource(MeetSignupsByMeetResource, '/api/signupsbymeet/<int:meet_id>')
+    api.add_resource(EnvironmentResource, '/api/environment/<string:key>')
+    api.add_resource(EntryWorkAroundResource, '/api/entryworkaround')
 
     return api
