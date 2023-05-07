@@ -66,6 +66,9 @@ const HomePage = () => {
             <Link className="nav-link" to="/map">
               Map of all Swimmers
             </Link>
+            <Link className="nav-link" to="/selectmeet">
+              Pick Swimmer's Events
+            </Link>
           </>
         )}
       </>

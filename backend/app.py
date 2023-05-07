@@ -15,7 +15,7 @@ from resources.parent import ParentResource, ParentsResource
 from resources.coach import CoachesResource, CoachResource
 from resources.meet import MeetResource, MeetsResource
 from resources.meetevent import MeetEventResource, MeetEventsResource
-from resources.entry import EntryResource, EntriesResource
+from resources.entry import EntryResource, EntriesResource, EntryWorkAroundResource
 from resources.relay import RelayResource, RelaysResource
 from resources.result import ResultResource, ResultsResource, SwimmerBestTimesResource, TeamBestTimeResource
 from resources.family import FamiliesResource, FamilyResource
@@ -102,5 +102,6 @@ def create_routes():
     api.add_resource(AddMeetSignupResource, '/api/signups')
     api.add_resource(MeetSignupsByMeetResource, '/api/signupsbymeet/<int:meet_id>')
     api.add_resource(EnvironmentResource, '/api/environment/<string:key>')
+    api.add_resource(EntryWorkAroundResource, '/api/entryworkaround')
 
     return api

@@ -11,6 +11,9 @@ import GroupsPage from "./pages/GroupsPage/GroupsPage";
 import SwimmerGroupsPage from "./pages/SwimmerGroupsPage/SwimmerGroupsPage";
 import MapPage from "./pages/MapPage/MapPage";
 import MeetSignupPage from "./pages/MeetSignupPage/MeetSignupPage";
+import ResultsPage from "./pages/ResultsPage/ResultsPage";
+import PickEventsPage from "./pages/PickEventsPage/PickEventsPage";
+import PickEventsForMeetPage from "./pages/PickEventsForMeetPage/PickEventsForMeetPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -18,7 +21,6 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
-import ResultsPage from "./pages/ResultsPage/ResultsPage";
 
 function App() {
   return (
@@ -78,6 +80,22 @@ function App() {
           element={
             <PrivateRoute>
               <ResultsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/selectmeet"
+          element={
+            <PrivateRoute>
+              <PickEventsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/selectformeet"
+          element={
+            <PrivateRoute>
+              <PickEventsForMeetPage />
             </PrivateRoute>
           }
         />

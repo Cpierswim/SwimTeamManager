@@ -6,10 +6,10 @@ from database.schemas import entry_schema, entries_schema
 from marshmallow import ValidationError
 
 class EntriesResource(Resource):
-    @jwt_required()
+    # @jwt_required()
     def post(self):
         try:
-            verify_jwt_in_request()
+            # verify_jwt_in_request()
             form_data = request.get_json()
             new_entry = entry_schema.load(form_data)
             db.session.add(new_entry)
@@ -18,19 +18,18 @@ class EntriesResource(Resource):
         except ValidationError as err:
             return err.messages, 400
         
-    @jwt_required()
     def get(self):
         try:
-            verify_jwt_in_request()
-            entry_id = request.args.get('event_id')
+            event_id = request.args.get('event_id')
             swimmer_id = request.args.get('swimmer_id')
             entries = None
-            if (entry_id and swimmer_id):
-                return "Cannot search by event_id and swimmer_id", 400
-            if(not entry_id and not swimmer_id):
-                return "entry_id or swimmer_id required", 400
-            if(entry_id):
-                entries = Entry.query.filter_by(entry_id=entry_id)
+            if (event_id and swimmer_id):
+                entries = Entry.query.filter_by(event_id=event_id, swimmer_id=swimmer_id).first()
+                return entry_schema.dump(entries), 200
+            if(not event_id and not swimmer_id):
+                return "event_id or swimmer_id required", 400
+            if(event_id):
+                entries = Entry.query.filter_by(event_id=event_id)
             if(swimmer_id):
                 entries = Entry.query.filter_by(swimmer_id=swimmer_id)
             return entries_schema.dump(entries), 200
@@ -76,3 +75,10 @@ class EntryResource(Resource):
         except ValidationError as err:
             return err.messages, 400
             
+class EntryWorkAroundResource(Resource):
+    def post(self):
+        form_data = request.get_json()
+        new_entry = entry_schema.load(form_data)
+        db.session.add(new_entry)
+        db.session.commit()
+        return entry_schema.dump(new_entry), 201

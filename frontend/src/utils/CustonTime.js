@@ -8,7 +8,7 @@ const getTimeString = (time_in_mills) => {
   let seconds_string =
     minutes > 0 && seconds < 10 ? `0${seconds}` : seconds.toString();
   let hundredths_string =
-    hundredths < 10 ? `:0${hundredths}` : `:${hundredths}`;
+    hundredths < 10 ? `:0${hundredths}` : `.${hundredths}`;
   let full_string = minutes_string + seconds_string + hundredths_string;
   return full_string;
 };
