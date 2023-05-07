@@ -165,7 +165,8 @@ class Result(db.Model):
     swimmer3 = db.Column(db.Integer, nullable=True)
     swimmer4 = db.Column(db.Integer, nullable=True)
     distance = db.Column(db.Integer, nullable=False)
-    stroke = db.Column(db.Integer, nullable=False)
+    stroke = db.Column(db.Integer, nullable=False) 
+    meet_id = db.Column(db.Integer, nullable=True)
 
     def __repr__(self):
         return self.time
@@ -185,3 +186,11 @@ class GroupCoach(db.Model):
 class LastFamilyID(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     last_family_id = db.Column(db.Integer, nullable=False)
+
+class MeetSignup(db.Model):
+    swimmer_id = db.Column(db.Integer, primary_key=True)
+    meet_id = db.Column(db.Integer, primary_key=True)
+
+class Environment(db.Model):
+    key = db.Column(db.String(255), primary_key=True)
+    value = db.Column(db.String(255), nullable=True)

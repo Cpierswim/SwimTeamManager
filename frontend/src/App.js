@@ -10,6 +10,7 @@ import RegisterCoachPage from "./pages/RegisterCoachPage/RegisterCoachPage";
 import GroupsPage from "./pages/GroupsPage/GroupsPage";
 import SwimmerGroupsPage from "./pages/SwimmerGroupsPage/SwimmerGroupsPage";
 import MapPage from "./pages/MapPage/MapPage";
+import MeetSignupPage from "./pages/MeetSignupPage/MeetSignupPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -17,6 +18,7 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+import ResultsPage from "./pages/ResultsPage/ResultsPage";
 
 function App() {
   return (
@@ -60,6 +62,22 @@ function App() {
           element={
             <PrivateRoute>
               <MapPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/meetsignup"
+          element={
+            <PrivateRoute>
+              <MeetSignupPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/results"
+          element={
+            <PrivateRoute>
+              <ResultsPage />
             </PrivateRoute>
           }
         />

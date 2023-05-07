@@ -9,28 +9,37 @@ const SwimmerGroupPicker = ({ swimmer, groups }) => {
   const [user, token] = useAuth();
 
   useEffect(() => {
-    const updateGroup = async () => {
-      if (group != swimmer.group_id) {
-        let url = `${BASE_URL}/swimmer/${swimmer.id}`;
-        let data;
-        if (group !== "-1") data = { group_id: group };
-        else data = { group_id: null };
-        let config = {
-          headers: { Authorization: "Bearer " + token },
-        };
-        let response = await axios.put(url, data, config);
-      }
-    };
-    updateGroup();
-  }, [group]);
+    setGroup(swimmer.group_id);
+  }, []);
+
+  const updateGroup = async (test_group) => {
+    if (test_group != swimmer.group_id) {
+      let url = `${BASE_URL}/swimmer/${swimmer.id}`;
+      let data;
+      if (test_group !== "-1") data = { group_id: test_group };
+      else data = { group_id: null };
+      let config = {
+        headers: { Authorization: "Bearer " + token },
+      };
+      let response = await axios.put(url, data, config);
+    }
+  };
+
+  const test = async (e) => {
+    // debugger;
+    let value = e.target.value;
+    updateGroup(value);
+    setGroup(value);
+  };
 
   return (
     <>
       <select
         name={`group_selector${swimmer.id}`}
         id={`group_selector${swimmer.id}`}
-        value={swimmer.group_id ? swimmer.group_id : undefined}
-        onChange={({ target: { value } }) => setGroup(value)}
+        value={group ? group : undefined}
+        // onChange={({ target: { value } }) => setGroup(value)}
+        onChange={test}
       >
         <option key={-1} value={-1}>
           --group unassigned--

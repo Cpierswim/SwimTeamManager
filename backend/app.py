@@ -21,6 +21,8 @@ from resources.result import ResultResource, ResultsResource, SwimmerBestTimesRe
 from resources.family import FamiliesResource, FamilyResource
 from resources.group_coach import GroupCoachResource, GroupCoachesResource
 from resources.last_family_id import LastFamilyIDResource
+from resources.meetsignup import MeetSignupResource, MeetSignupsResource, AddMeetSignupResource, MeetSignupsByMeetResource
+from resources.environment import EnvironmentResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -95,5 +97,10 @@ def create_routes():
     api.add_resource(LastFamilyIDResource, '/api/familyID')
     api.add_resource(SwimmerBestTimesResource, '/api/besttimes/<int:swimmer_id>')
     api.add_resource(TeamBestTimeResource, '/api/besttimes')
+    api.add_resource(MeetSignupsResource, '/api/signups/<int:swimmer_id>')
+    api.add_resource(MeetSignupResource, '/api/signups/<int:swimmer_id>/<int:meet_id>')
+    api.add_resource(AddMeetSignupResource, '/api/signups')
+    api.add_resource(MeetSignupsByMeetResource, '/api/signupsbymeet/<int:meet_id>')
+    api.add_resource(EnvironmentResource, '/api/environment/<string:key>')
 
     return api

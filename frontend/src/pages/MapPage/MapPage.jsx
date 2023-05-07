@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./MapPage.css";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import { GOOGLE_MAPS_API_KEY } from "../../utils/Keys/keys.js";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
 const MapPage = () => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCNeDY1iL7JO9kV48ZdeRSikSjm009IAjw",
+    googleMapsApiKey: GOOGLE_MAPS_API_KEY,
   });
   const [center, setCenter] = useState({ lat: 0, lng: 0 });
   const [addresses, setAddresses] = useState([]);

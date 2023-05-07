@@ -13,7 +13,6 @@ class ResultsResource(Resource):
     @jwt_required()
     def post(self):
         try:
-            verify_jwt_in_request()
             form_data = request.get_json()
             new_result = result_schema.load(form_data)
             db.session.add(new_result)
@@ -21,6 +20,15 @@ class ResultsResource(Resource):
             return result_schema.dump(new_result), 201
         except ValidationError as err:
             return err.messages, 400
+    
+    @jwt_required()
+    def get(self):
+        swimmer_id = request.args.get('swimmer_id')
+        if(not swimmer_id):
+           return "swimmer_id required", 400
+        results = Result.query.filter_by(swimmer1=swimmer_id)
+        return results_schema.dump(results)
+            
         
 class ResultResource(Resource):
     @jwt_required()
@@ -74,7 +82,7 @@ class ResultResource(Resource):
             return err.messages, 400
         
 class SwimmerBestTimesResource(Resource):
-    @jwt_required()
+    # @jwt_required()
     def get(self, swimmer_id):
         # result = Result.query.get_or_404(swimmer1=swimmer_id).group_by()
         load_dotenv()
