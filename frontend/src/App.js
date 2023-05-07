@@ -14,6 +14,7 @@ import MeetSignupPage from "./pages/MeetSignupPage/MeetSignupPage";
 import ResultsPage from "./pages/ResultsPage/ResultsPage";
 import PickEventsPage from "./pages/PickEventsPage/PickEventsPage";
 import PickEventsForMeetPage from "./pages/PickEventsForMeetPage/PickEventsForMeetPage";
+import RelayPickerPage from "./pages/RelayPickerPage/RelayPickerPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -96,6 +97,14 @@ function App() {
           element={
             <PrivateRoute>
               <PickEventsForMeetPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/relays"
+          element={
+            <PrivateRoute>
+              <RelayPickerPage />
             </PrivateRoute>
           }
         />

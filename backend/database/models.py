@@ -149,6 +149,7 @@ class Relay(db.Model):
     swimmer2 = db.Column(db.Integer, nullable=True)
     swimmer3 = db.Column(db.Integer, nullable=True)
     swimmer4 = db.Column(db.Integer, nullable=True)
+    time = db.Column(db.Integer, nullable=True)
     
     def __repr__(self):
         return self.relay_identifier

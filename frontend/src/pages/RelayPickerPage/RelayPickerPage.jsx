@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import SwimmerEventPicker from "../../components/SwimmerEventPicker/SwimmerEventPicker";
-import { Link } from "react-router-dom";
+import RelayEventPicker from "../../components/RelayEventPicker/RelayEventPicker";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
-const PickEventsForMeetPage = () => {
+const RelayPickerPage = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const meet_id = queryParameters.get("m");
   const [user, token] = useAuth();
   const [meet, setMeet] = useState({});
   const [signedUpSwimmers, setSignedUpSwimmers] = useState([]);
   const [meetEvents, setMeetEvents] = useState([]);
+  const [teamBestTimes, setTeamBestTimes] = useState([]);
 
   useEffect(() => {
     let signups;
@@ -66,34 +66,52 @@ const PickEventsForMeetPage = () => {
       };
       let response = await axios.get(url, config);
       //   console.log(response.data);
-      setMeetEvents(response.data);
+      let events = response.data;
+      events = events.filter((event) => event.event_type === 2);
+      setMeetEvents(events);
+    };
+    const fetchTeamBestTimes = async () => {
+      let url = `${BASE_URL}/besttimes?team_id=1`;
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      let response = await axios.get(url, config);
+      //   debugger;
+      let tempBestTimes = response.data;
+
+      tempBestTimes = tempBestTimes.filter((bestTime) => {
+        for (let i = 0; i < signups.length; i++)
+          if (signups[i].swimmer_id === bestTime.swimmer_id) return true;
+        return false;
+      });
+      //   console.log(tempBestTimes);
+      setTeamBestTimes(tempBestTimes);
     };
     fetchMeet();
     fetchSignUps();
     fetchSignedUpSwimmers();
     fetchEvents();
+    fetchTeamBestTimes();
   }, []);
 
   return (
     <>
-      <h1>Picking Events for: {meet.name}</h1>
-      {signedUpSwimmers.map((swimmer) => {
+      <h1>Picking relays for {meet.name}</h1>
+
+      {meetEvents.map((event, index) => {
         return (
-          <SwimmerEventPicker
-            key={"swmr" + swimmer.id}
-            swimmer={swimmer}
-            meet={meet}
-            meetEvents={meetEvents}
+          <RelayEventPicker
+            key={index}
+            enteredSwimmers={signedUpSwimmers}
+            relayEvent={event}
+            bestTimes={teamBestTimes}
           />
         );
       })}
-      <br />
-      <br />
-      <p>
-        <Link to={`/relays?m=${meet.id}`}>Pick relays for this meet</Link>
-      </p>
     </>
   );
 };
 
-export default PickEventsForMeetPage;
+export default RelayPickerPage;

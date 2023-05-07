@@ -215,10 +215,11 @@ class RelaySchema(ma.Schema):
     swimmer2 = fields.Integer(required=False)
     swimmer3 = fields.Integer(required=False)
     swimmer4 = fields.Integer(required=False)
+    time = fields.Integer(required=False)
 
     class Meta:
         fields = ("id", "relay_identifier", "swimmer1", "swimmer2", 
-                  "swimmer3", "swimmer4")
+                  "swimmer3", "swimmer4", "time")
         
     @post_load
     def create_relay(self, data, **kwargs):
