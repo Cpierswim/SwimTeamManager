@@ -35,7 +35,7 @@ const Navbar = () => {
               Home
             </Link>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a className="nav-link disabled" href="#">
               Parent
             </a>
@@ -44,7 +44,7 @@ const Navbar = () => {
             <a className="nav-link disabled" href="#">
               Coach
             </a>
-          </li>
+          </li> */}
           <li className="nav-item">
             {user ? (
               <button onClick={logoutUser}>Logout</button>
