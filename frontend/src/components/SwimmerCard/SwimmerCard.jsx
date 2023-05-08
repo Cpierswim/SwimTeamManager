@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import getTimeString from "../../utils/CustonTime.js";
 import useAuth from "../../hooks/useAuth";
+import "./SwimmerCard.css";
 const BASE_URL = "http://127.0.0.1:5000/api";
 
 const SwimmerCard = ({ swimmer }) => {
@@ -27,6 +28,11 @@ const SwimmerCard = ({ swimmer }) => {
   const displayBestTimes = () => {
     return (
       <>
+        {bestTimes.length == 0 ? (
+          <h6>No best times recorded</h6>
+        ) : (
+          <h6>Best Times</h6>
+        )}
         {bestTimes.map((bestTime, index) => {
           let built_string = "";
           built_string += bestTime.distance + " ";
@@ -60,22 +66,25 @@ const SwimmerCard = ({ swimmer }) => {
   };
 
   return (
-    <div>
-      <h5>
-        {swimmer.preferred_first_name
-          ? swimmer.preferred_first_name
-          : swimmer.first_name}{" "}
-        {swimmer.last_name}
-      </h5>
-      <p>{swimmer.birthdate}</p>
+    <div className="swimmer_card">
+      <div className="split_header">
+        <h5>
+          {swimmer.preferred_first_name
+            ? swimmer.preferred_first_name
+            : swimmer.first_name}{" "}
+          {swimmer.last_name}
+        </h5>
+        <p>{swimmer.birthdate}</p>
+      </div>
+      <hr />
       <p>Group: {swimmer.group ? swimmer.group.group_name : "unassigned"}</p>
+      <hr />
       {displayBestTimes()}
-      <Link className="nav-link" to={`/meetsignup?s=${swimmer.id}`}>
-        Sign up for a Meet
-      </Link>
-      <Link className="nav-link" to={`/results?s=${swimmer.id}`}>
-        See all results
-      </Link>
+      <hr />
+      <div className="split_header">
+        <Link to={`/meetsignup?s=${swimmer.id}`}>Sign up for a Meet</Link>
+        <Link to={`/results?s=${swimmer.id}`}>See all results</Link>
+      </div>
     </div>
   );
 };

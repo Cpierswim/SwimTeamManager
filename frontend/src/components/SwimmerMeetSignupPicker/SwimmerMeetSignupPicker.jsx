@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import Address from "../Address/Address";
+import "./SwimmerMeetSignupPicker.css";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
@@ -56,19 +57,36 @@ const SwimmerMeetSignupPicker = ({
   }
 
   return (
-    <>
+    <div className="signup_card">
+      <h3>{meet.name}</h3>
+      <h6>Meet Date: {meet.date}</h6>
+      <p>Start time: {meet.start_time}</p>{" "}
+      <p>
+        Location: {meet.location_name}
+        <Address address={meet.address} />
+      </p>
       <select
         name={`group_selector${swimmer.id}`}
         id={`group_selector${swimmer.id}`}
         value={meetSignedUpFor()}
         onChange={selectChanged}
       >
-        <option value="N">No</option>
-        <option value="Y">Yes</option>
-      </select>{" "}
-      {meet.name} at {meet.location_name} {meet.date} {meet.start_time}{" "}
-      <Address address={meet.address} />
-    </>
+        <option value="N">
+          No,{" "}
+          {swimmer.preferred_first_name
+            ? swimmer.preferred_first_name
+            : swimmer.first_name}{" "}
+          {swimmer.last_name} is not available for this meet
+        </option>
+        <option value="Y">
+          Yes, sign{" "}
+          {swimmer.preferred_first_name
+            ? swimmer.preferred_first_name
+            : swimmer.first_name}{" "}
+          {swimmer.last_name} up for this meet
+        </option>
+      </select>
+    </div>
   );
 };
 

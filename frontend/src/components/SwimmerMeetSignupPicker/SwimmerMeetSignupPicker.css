@@ -1,0 +1,13 @@
+.signup_card {
+  display: flex;
+  flex-direction: column;
+  width: 80% !important;
+  border: solid;
+  border-color: gray;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import useCustomForm from "../../hooks/useCustomForm";
+import "./RegisterPage.css";
 
 const NOTHING_COMPLETE = 1;
 const USER_CREATION_COMPLETE = 2;
@@ -77,7 +78,7 @@ const RegisterPage = () => {
 
   const UserForm = () => {
     return (
-      <form className="form" onSubmit={partOneSubmit}>
+      <form className="form1" onSubmit={partOneSubmit}>
         <h2>Create the user account</h2>
         <label>
           Username:{" "}
@@ -137,7 +138,7 @@ const RegisterPage = () => {
 
   const ParentForm = () => {
     return (
-      <form className="form" onSubmit={partTwoSubmit}>
+      <form className="form2" onSubmit={partTwoSubmit}>
         <h2>Add a parent to the account</h2>
         <label>
           Phone:{" "}
@@ -257,7 +258,7 @@ const RegisterPage = () => {
 
   const SwimmerForm = () => {
     return (
-      <form className="form" onSubmit={partThreeSubmit}>
+      <form className="form3" onSubmit={partThreeSubmit}>
         <h2>Add the first swimmer</h2>
         <label>
           Legal First Name:{" "}
