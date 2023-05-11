@@ -90,6 +90,7 @@ class Coach(db.Model):
 class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     group_name = db.Column(db.String(255), nullable=False)
+    start_time = db.Column(db.Time, nullable=True)
     team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     team = db.relationship("Team")
 

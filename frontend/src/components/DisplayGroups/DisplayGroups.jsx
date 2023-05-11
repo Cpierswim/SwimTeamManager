@@ -10,6 +10,7 @@ const DisplayGroups = () => {
   const [displayAddGroup, setdisplayAddGroup] = useState(false);
   const [status, setStatus] = useState(STATUS_DISPLAYING_GROUPS);
   const [newGroupName, setNewGroupName] = useState("");
+  const [newGroupStartTime, setNewGroupStartTime] = useState("");
   const [groups, setGroups] = useState([]);
   const [user, token] = useAuth();
   const [coach, setCoach] = useState({});
@@ -38,6 +39,7 @@ const DisplayGroups = () => {
     let data = {
       group_name: newGroupName,
       team_id: 1,
+      start_time: newGroupStartTime,
     };
     let headers = {
       headers: {
@@ -54,7 +56,11 @@ const DisplayGroups = () => {
     return (
       <>
         {groups.map((group) => {
-          return <p key={group.id}>{group.group_name}</p>;
+          return (
+            <p key={group.id}>
+              {group.group_name} {group.start_time}
+            </p>
+          );
         })}
         {displayAddGroup && (
           <button
@@ -79,6 +85,16 @@ const DisplayGroups = () => {
             required
             value={newGroupName}
             onChange={(e) => setNewGroupName(e.target.value)}
+          ></input>
+        </label>
+        <br />
+        <label>
+          Start Time:{" "}
+          <input
+            type="time"
+            required
+            value={newGroupStartTime}
+            onChange={(e) => setNewGroupStartTime(e.target.value)}
           ></input>
         </label>
         <button>Add Group</button>

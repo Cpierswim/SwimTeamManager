@@ -62,9 +62,10 @@ class GroupSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
     group_name = fields.String(required=True)
     team_id = fields.Integer(required=True)
+    start_time = fields.Time(required=False)
 
     class Meta:
-        fields = ("id", "group_name", "team_id")
+        fields = ("id", "group_name", "team_id", "sstart_time")
 
     @post_load
     def create_group(self, data, **kwargs):
