@@ -1,6 +1,8 @@
 // General Imports
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import { extendTheme, ChakraProvider, extendBaseTheme } from "@chakra-ui/react";
+import chakraTheme from "@chakra-ui/theme";
 
 // Pages Imports
 import HomePage from "./pages/HomePage/HomePage";
@@ -22,6 +24,14 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+
+const { Button } = chakraTheme.components;
+
+const theme = extendBaseTheme({
+  components: {
+    Button,
+  },
+});
 
 function App() {
   return (
