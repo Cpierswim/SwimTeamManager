@@ -1,8 +1,6 @@
 // General Imports
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import { extendTheme, ChakraProvider, extendBaseTheme } from "@chakra-ui/react";
-import chakraTheme from "@chakra-ui/theme";
 
 // Pages Imports
 import HomePage from "./pages/HomePage/HomePage";
@@ -25,13 +23,13 @@ import Footer from "./components/Footer/Footer";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 
-const { Button } = chakraTheme.components;
+//Material UI Imports
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
-const theme = extendBaseTheme({
-  components: {
-    Button,
-  },
-});
+import TestPage from "./pages/TestPage/TestPage";
 
 function App() {
   return (
@@ -120,6 +118,7 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/test" element={<TestPage />} />
       </Routes>
       <Footer />
     </div>
