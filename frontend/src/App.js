@@ -33,7 +33,7 @@ import TestPage from "./pages/TestPage/TestPage";
 
 function App() {
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <Navbar />
       <Routes>
         <Route
