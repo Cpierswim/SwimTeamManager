@@ -23,6 +23,7 @@ from resources.group_coach import GroupCoachResource, GroupCoachesResource
 from resources.last_family_id import LastFamilyIDResource
 from resources.meetsignup import MeetSignupResource, MeetSignupsResource, AddMeetSignupResource, MeetSignupsByMeetResource
 from resources.environment import EnvironmentResource
+from resources.setup import SetupResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -103,5 +104,5 @@ def create_routes():
     api.add_resource(MeetSignupsByMeetResource, '/api/signupsbymeet/<int:meet_id>')
     api.add_resource(EnvironmentResource, '/api/environment/<string:key>')
     api.add_resource(EntryWorkAroundResource, '/api/entryworkaround')
-
+    api.add_resource(SetupResource, '/api/setup')
     return api

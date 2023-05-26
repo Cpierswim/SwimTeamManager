@@ -10,8 +10,8 @@ html {
 .bg-image {
   background-image: url("swimmer_background.jpg");
 
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
+  filter: blur(2px);
+  /* -webkit-filter: blur(8px); */
 
   height: 100%;
 

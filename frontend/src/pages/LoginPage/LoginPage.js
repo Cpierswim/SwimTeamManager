@@ -55,7 +55,12 @@ const LoginPage = () => {
         <Link className="link" to="/register">
           Click to create an account and register for the team!
         </Link>
-        <Button className="buttonpadding" size="large" variant="contained">
+        <Button
+          type="submit"
+          className="buttonpadding"
+          size="large"
+          variant="contained"
+        >
           Login!
         </Button>
         {/* <button>Login!</button> */}
