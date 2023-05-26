@@ -1,3 +1,74 @@
 .error {
   color: red;
 }
+
+.main_part {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 56px);
+}
+
+.white-label {
+  color: white !important;
+}
+
+.inputform {
+  width: 55%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 48%;
+  width: 60%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+  border-color: rgba(23, 23, 216, 0.5);
+  border-width: 3px;
+  border-radius: 15px;
+  padding-top: 45px;
+  padding-bottom: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  min-height: 400px;
+  max-width: 561px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.MuiInputBase-input {
+  color: white;
+}
+.margin-30 {
+  width: 80% !important;
+}
+
+.main-grid {
+  height: calc(100% - 56px);
+}
+
+.full-height {
+  height: 100% !important;
+}
+
+.white-text {
+  color: white !important;
+  margin-bottom: 15px;
+}
+.MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
+}
+.buttonpadding {
+  padding: 20px;
+}
+.link {
+  color: white;
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: underline;
+}

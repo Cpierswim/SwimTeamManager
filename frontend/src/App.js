@@ -23,9 +23,17 @@ import Footer from "./components/Footer/Footer";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 
+//Material UI Imports
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
+import TestPage from "./pages/TestPage/TestPage";
+
 function App() {
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <Navbar />
       <Routes>
         <Route
@@ -110,6 +118,7 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/test" element={<TestPage />} />
       </Routes>
       <Footer />
     </div>

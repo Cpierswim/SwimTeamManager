@@ -82,9 +82,11 @@ export const AuthProvider = ({ children }) => {
         navigate("/register");
       }
     } catch (error) {
-      console.log(error.response.data);
+      error.response.data
+        ? console.log(error.response.data)
+        : console.log("No response from database");
       setIsServerError(true);
-      navigate("/register");
+      // navigate("/register");
     }
   };
 

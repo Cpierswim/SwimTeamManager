@@ -1,0 +1,1 @@
+CREATE DATABASE IF NOT EXISTS swim_team_manager;
