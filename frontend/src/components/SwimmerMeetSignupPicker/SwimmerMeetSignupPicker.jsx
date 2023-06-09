@@ -56,16 +56,36 @@ const SwimmerMeetSignupPicker = ({
     setSignups(signups);
   }
 
+  function getTimeString(time) {
+    if (time) {
+      let arr = time.split(":");
+      let hour = parseInt(arr[0]);
+      let AMPM = "AM";
+      if (hour > 12) {
+        hour -= 12;
+        AMPM = "PM";
+      }
+      return hour + ":" + arr[1] + " " + AMPM;
+    } else return "unknown start time";
+  }
+
   return (
     <div className="signup_card">
-      <h3>{meet.name}</h3>
-      <h6>Meet Date: {meet.date}</h6>
-      <p>Start time: {meet.start_time}</p>{" "}
-      <p>
-        Location: {meet.location_name}
-        <Address address={meet.address} />
-      </p>
+      <h2>{meet.name}</h2>
+      <div className="split_evenly">
+        <div>
+          <h6>Meet Date: {meet.date}</h6>
+          <p>Start time: {getTimeString(meet.start_time)}</p>
+        </div>
+        <div>
+          <div>
+            Location: {meet.location_name}
+            <Address address={meet.address} />
+          </div>
+        </div>
+      </div>
       <select
+        className="more_space"
         name={`group_selector${swimmer.id}`}
         id={`group_selector${swimmer.id}`}
         value={meetSignedUpFor()}

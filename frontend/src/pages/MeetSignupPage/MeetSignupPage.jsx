@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import "./MeetSignupPage.css";
 import SwimmerMeetSignupPicker from "../../components/SwimmerMeetSignupPicker/SwimmerMeetSignupPicker";
 const BASE_URL = "http://127.0.0.1:5000/api";
 
@@ -58,7 +59,7 @@ const MeetSignupPage = () => {
     <p>UNAUTHORIZED</p>
   ) : (
     <>
-      <h2>
+      <h2 className="name_label">
         {swimmer.preferred_first_name
           ? swimmer.preferred_first_name
           : swimmer.first_name}{" "}
