@@ -1,8 +1,8 @@
-.form3 {
+/* .form3 {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
+} */
 
 .main_part {
   width: 100%;
@@ -14,12 +14,13 @@
 }
 
 .form1,
-.form2 {
+.form2,
+.form3 {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 80%;
+  height: 70%;
   width: 60%;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px);
@@ -52,4 +53,68 @@
 }
 .buttonpadding {
   padding: 20px;
+}
+
+.inline_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.inline_flex2 {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.MuiSelect-icon,
+.MuiSelect-select,
+.css-yjsfm1,
+.forceWhite,
+.MuiOutlinedInput-notchedOutline,
+.MuiFormLabel-root,
+.MuiSelect-nativeInput,
+.MuiInputBase-input,
+.MuiInputBase-root {
+  color: white !important;
+}
+
+.more_margin {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.buttonpadding {
+  padding: 20px;
+}
+.share_width {
+  width: 50%;
+}
+.testtt {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.MuiFormControl-root {
+  width: 100%;
+}
+.muti_buttons {
+  display: inline;
+}
+.button_margin {
+  margin-left: 15px !important;
+  margin-right: 15px !important;
+}
+
+.full_width {
+  width: 100% !important;
+}
+.curve {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.09);
+  border-style: solid;
+  border-color: white;
+  font-size: large;
+  color: white;
 }

@@ -51,7 +51,7 @@ const HomePage = () => {
 
   const coachUser = () => {
     return (
-      <>
+      <div className="coach_display">
         {coach.isHeadCoach && (
           <>
             <p>
@@ -71,7 +71,7 @@ const HomePage = () => {
             </p>
           </>
         )}
-      </>
+      </div>
     );
   };
 
