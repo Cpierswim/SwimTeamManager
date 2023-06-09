@@ -1,16 +1,49 @@
 .swimmer_card {
-  border-color: darkgray;
-  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  min-width: 30%;
+  max-width: 80%;
+  margin-top: 5% !important;
+  margin-bottom: 5% !important;
+  max-height: calc(90% - 64px);
+  overflow: auto;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+  border-color: rgba(23, 23, 216, 0.5);
+  border-width: 3px;
   border-radius: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-  padding: 30px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 3%;
+  padding-right: 3%;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .split_header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  vertical-align: middle;
+}
+.split_buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.swimmer-divider {
+  width: 70%;
+  height: 1px;
+  background-color: white;
+  margin-bottom: 20px;
 }

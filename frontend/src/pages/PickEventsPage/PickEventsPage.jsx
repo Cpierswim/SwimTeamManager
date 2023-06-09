@@ -30,19 +30,17 @@ const PickEventsPage = () => {
 
   return (
     <div className="card_for_pickeventspage">
-      <h3>Events Currently Open to Pick Events For</h3>
+      <h3>Meets Currently Open to Pick Events For</h3>
       <br />
       {meets.map((meet) => {
         return (
-          <>
-            <Button
-              key={meet.id}
-              variant="contained"
-              href={`/selectformeet?m=${meet.id}`}
-            >
-              Pick events for {meet.name}
-            </Button>
-          </>
+          <Button
+            key={meet.id}
+            variant="contained"
+            href={`/selectformeet?m=${meet.id}`}
+          >
+            Pick events for {meet.name}
+          </Button>
         );
       })}
     </div>

@@ -80,15 +80,28 @@ const HomePage = () => {
 
   const parentUser = () => {
     return (
-      <>
-        <h1>Home Page for {user.username}!</h1>
-        {parents.map((parent) => (
-          <ParentCard key={parent.id} parent={parent} />
-        ))}
-        {swimmers.map((swimmer) => (
-          <SwimmerCard key={swimmer.id} swimmer={swimmer} />
-        ))}
-      </>
+      <div className="family-container">
+        <div className="family-info">
+          <div className="family-header">
+            {console.log(parents)}
+            {parents.length > 0 ? (
+              <h1>Home Page for the {parents[0].last_name} Family!</h1>
+            ) : (
+              <h1>FamilyHome page</h1>
+            )}
+          </div>
+          <div className="family-header">
+            {parents.map((parent) => (
+              <ParentCard key={parent.id} parent={parent} />
+            ))}
+          </div>
+        </div>
+        <div className="swimmer-cards-container">
+          {swimmers.map((swimmer) => (
+            <SwimmerCard key={swimmer.id} swimmer={swimmer} />
+          ))}
+        </div>
+      </div>
     );
   };
 
