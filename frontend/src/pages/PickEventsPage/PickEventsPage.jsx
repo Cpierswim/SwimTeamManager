@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "./PickEventsPage.css";
+import { Button } from "@mui/material";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
@@ -27,15 +29,21 @@ const PickEventsPage = () => {
   }, []);
 
   return (
-    <>
+    <div className="card_for_pickeventspage">
+      <h3>Meets Currently Open to Pick Events For</h3>
+      <br />
       {meets.map((meet) => {
         return (
-          <Link key={meet.id} className="" to={`/selectformeet?m=${meet.id}`}>
+          <Button
+            key={meet.id}
+            variant="contained"
+            href={`/selectformeet?m=${meet.id}`}
+          >
             Pick events for {meet.name}
-          </Link>
+          </Button>
         );
       })}
-    </>
+    </div>
   );
 };
 

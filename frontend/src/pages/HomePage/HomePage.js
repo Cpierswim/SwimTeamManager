@@ -5,6 +5,8 @@ import axios from "axios";
 import ParentCard from "../../components/ParentCard/ParentCard";
 import SwimmerCard from "../../components/SwimmerCard/SwimmerCard";
 import { Link } from "react-router-dom";
+import "./HomePage.css";
+import { Button } from "@mui/material";
 
 const HomePage = () => {
   const [user, token] = useAuth();
@@ -51,50 +53,62 @@ const HomePage = () => {
 
   const coachUser = () => {
     return (
-      <>
+      <div className="coach_display">
+        <h3 className="coach_headline">Hello Coach {coach.first_name}</h3>
         {coach.isHeadCoach && (
           <>
-            <p>
-              <Link to="/groups">Add Groups</Link>
-            </p>
-            <p>
-              <Link to="/register_coach">Add Coach</Link>
-            </p>
-            <p>
-              <Link to="/swimmersgroups">Assign Swimmers to Groups</Link>
-            </p>
-            <p>
-              <Link to="/map">Map of all Swimmers</Link>
-            </p>
-            <p>
-              <Link to="/selectmeet">Pick Swimmer's Events</Link>
-            </p>
+            <Button variant="contained" href="/groups">
+              Add Groups (Head Coach)
+            </Button>
+            <Button variant="contained" href="/register_coach">
+              Add Coach (Head Coach)
+            </Button>
+            <Button variant="contained" href="/swimmersgroups">
+              Assign Swimmers to Groups (Head Coach)
+            </Button>
           </>
         )}
-      </>
+        <Button variant="contained" href="/map">
+          Map of all Swimmers
+        </Button>
+        <Button variant="contained" href="/selectmeet">
+          Pick Swimmer's Events
+        </Button>
+      </div>
     );
   };
 
   const parentUser = () => {
     return (
-      <>
-        <h1>Home Page for {user.username}!</h1>
-        {parents.map((parent) => (
-          <ParentCard key={parent.id} parent={parent} />
-        ))}
-        {swimmers.map((swimmer) => (
-          <SwimmerCard key={swimmer.id} swimmer={swimmer} />
-        ))}
-      </>
+      <div className="family-container">
+        <div className="family-info">
+          <div className="family-header">
+            {console.log(parents)}
+            {parents.length > 0 ? (
+              <h1>Home Page for the {parents[0].last_name} Family!</h1>
+            ) : (
+              <h1>FamilyHome page</h1>
+            )}
+          </div>
+          <div className="family-header">
+            {parents.map((parent) => (
+              <ParentCard key={parent.id} parent={parent} />
+            ))}
+          </div>
+        </div>
+        <div className="swimmer-cards-container">
+          {swimmers.map((swimmer) => (
+            <SwimmerCard key={swimmer.id} swimmer={swimmer} />
+          ))}
+        </div>
+      </div>
     );
   };
 
   const anonymousUser = () => {
     return <h1>JCC Stingrays</h1>;
   };
-  return (
-    <div className="container">{user ? loggedInUser() : anonymousUser()}</div>
-  );
+  return <>{user ? loggedInUser() : anonymousUser()}</>;
 };
 
 export default HomePage;

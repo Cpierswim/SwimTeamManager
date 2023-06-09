@@ -1,15 +1,12 @@
-.swimmer_card {
+.register_coach_form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-
-  min-width: 30%;
+  min-height: 70%;
+  min-width: 60%;
   max-width: 80%;
-  margin-top: 5% !important;
-  margin-bottom: 5% !important;
-  max-height: calc(90% - 64px);
-  overflow: auto;
+  margin-top: 10% !important;
   color: white;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px);
@@ -18,32 +15,36 @@
   border-radius: 15px;
   padding-top: 40px;
   padding-bottom: 40px;
-  padding-left: 3%;
-  padding-right: 3%;
+  padding-left: 5%;
+  padding-right: 5%;
   margin: auto;
+  min-height: 400px;
+  min-width: 300px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.split_header {
-  width: 100%;
+.split {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
-  vertical-align: middle;
-}
-.split_buttons {
+  justify-content: space-between;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
 }
-
-.swimmer-divider {
-  width: 70%;
-  height: 1px;
-  background-color: white;
-  margin-bottom: 20px;
+.half {
+  width: 47%;
+  display: grid;
+  row-gap: 15px;
+}
+.group_label {
+  margin-top: 15px;
+}
+.groups_list {
+  display: flex;
+  width: 80%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
 }

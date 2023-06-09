@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import getTimeString from "../../utils/CustonTime.js";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import "./RelayEventPicker.css";
+import { Button } from "@mui/material";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
@@ -198,58 +200,71 @@ const RelayEventPicker = ({ enteredSwimmers, relayEvent, bestTimes }) => {
 
   return (
     <>
-      <h3>
-        {relayEvent.distance} {stroke} - {letterCurrentlyPicking} Relay
-      </h3>
-      <input
-        readOnly={true}
-        type="text"
-        value={relaySwimmersNames.swimmer1}
-      ></input>
-      <input
-        readOnly={true}
-        type="text"
-        value={relaySwimmersTimesDisplayValues.swimmer1}
-      ></input>
-      <br />
-      <input
-        readOnly={true}
-        type="text"
-        value={relaySwimmersNames.swimmer2}
-      ></input>
-      <input
-        readOnly={true}
-        type="text"
-        value={relaySwimmersTimesDisplayValues.swimmer2}
-      ></input>
-      <br />
-      <input
-        readOnly={true}
-        type="text"
-        value={relaySwimmersNames.swimmer3}
-      ></input>
-      <input
-        readOnly={true}
-        type="text"
-        value={relaySwimmersTimesDisplayValues.swimmer3}
-      ></input>
-      <br />
-      <input
-        readOnly={true}
-        type="text"
-        value={relaySwimmersNames.swimmer4}
-      ></input>
-      <input
-        readOnly={true}
-        type="text"
-        value={relaySwimmersTimesDisplayValues.swimmer4}
-      ></input>
+      <div className="relay_container">
+        <h3>
+          {relayEvent.distance} {stroke} - {letterCurrentlyPicking} Relay
+        </h3>
+        <Button
+          variant="contained"
+          disabled={!autopickVisible}
+          onClick={autoPickRelay}
+        >
+          Auto Pick Relay
+        </Button>
+
+        <div className="swimmer-and-time">
+          <input
+            readOnly={true}
+            type="text"
+            value={relaySwimmersNames.swimmer1}
+          ></input>
+          <input
+            readOnly={true}
+            type="text"
+            value={relaySwimmersTimesDisplayValues.swimmer1}
+          ></input>
+        </div>
+        <div className="swimmer-and-time">
+          <input
+            readOnly={true}
+            type="text"
+            value={relaySwimmersNames.swimmer2}
+          ></input>
+          <input
+            readOnly={true}
+            type="text"
+            value={relaySwimmersTimesDisplayValues.swimmer2}
+          ></input>
+        </div>
+        <div className="swimmer-and-time">
+          <input
+            readOnly={true}
+            type="text"
+            value={relaySwimmersNames.swimmer3}
+          ></input>
+          <input
+            readOnly={true}
+            type="text"
+            value={relaySwimmersTimesDisplayValues.swimmer3}
+          ></input>
+        </div>
+        <div className="swimmer-and-time">
+          <input
+            readOnly={true}
+            type="text"
+            value={relaySwimmersNames.swimmer4}
+          ></input>
+          <input
+            readOnly={true}
+            type="text"
+            value={relaySwimmersTimesDisplayValues.swimmer4}
+          ></input>
+        </div>
+      </div>
       <br />
       <input readOnly={true} type="text" value={"Entry Time: NT"}></input>
       <br />
-      <button disabled={!autopickVisible} onClick={autoPickRelay}>
-        Auto Pick Relay
-      </button>
+
       <button disabled={true}>Add Another Relay</button>
     </>
   );

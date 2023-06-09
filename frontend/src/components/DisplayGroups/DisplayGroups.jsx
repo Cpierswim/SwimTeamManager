@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import "./DisplayGroups.css";
+import { Button } from "@mui/material";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 const STATUS_DISPLAYING_GROUPS = 1;
@@ -52,24 +54,49 @@ const DisplayGroups = () => {
     setNewGroupName("");
   };
 
+  function cancelAddGroup() {
+    setStatus(STATUS_DISPLAYING_GROUPS);
+  }
+
+  function getTimeString(time) {
+    if (time) {
+      let arr = time.split(":");
+      let hour = parseInt(arr[0]);
+      let AMPM = "AM";
+      if (hour > 12) {
+        hour -= 12;
+        AMPM = "PM";
+      }
+      return hour + ":" + arr[1] + " " + AMPM;
+    } else return "unknown start time";
+  }
+
   const displayGroups = () => {
     return (
       <>
-        {groups.map((group) => {
-          return (
-            <p key={group.id}>
-              {group.group_name} {group.start_time}
-            </p>
-          );
-        })}
+        <h2 className="groups_label">Currently Available Groups</h2>
+        <div className="group_list">
+          {groups.map((group) => {
+            return (
+              <div className="fullWidth" key={group.id}>
+                <h4>{group.group_name}</h4>
+                <p className="indent">
+                  {" "}
+                  Start Time: {getTimeString(group.start_time)}
+                </p>
+              </div>
+            );
+          })}
+        </div>
         {displayAddGroup && (
-          <button
+          <Button
+            variant="contained"
             onClick={() => {
               setStatus(STATUS_ADDING_GROUPS);
             }}
           >
             Add Group
-          </button>
+          </Button>
         )}
       </>
     );
@@ -77,27 +104,44 @@ const DisplayGroups = () => {
 
   const addGroups = () => {
     return (
-      <form onSubmit={addNewGroup}>
-        <label>
-          Group Name:{" "}
+      <form className="add_groups_form" onSubmit={addNewGroup}>
+        <div className="single_line">
+          <label htmlFor="newGroupName">Group Name: </label>
           <input
             type="text"
             required
+            id="newGroupName"
             value={newGroupName}
             onChange={(e) => setNewGroupName(e.target.value)}
           ></input>
-        </label>
-        <br />
-        <label>
-          Start Time:{" "}
+        </div>
+        <div className="single_line">
+          <label htmlFor="newGroupStartTime">Start Time: </label>
           <input
             type="time"
             required
+            id="newGroupStartTime"
             value={newGroupStartTime}
             onChange={(e) => setNewGroupStartTime(e.target.value)}
           ></input>
-        </label>
-        <button>Add Group</button>
+        </div>
+        <div className="button_row">
+          <Button
+            type="submit"
+            className="add_group_button"
+            variant="contained"
+          >
+            Add Group
+          </Button>
+          <Button
+            type="button"
+            onClick={cancelAddGroup}
+            className="add_group_button"
+            variant="contained"
+          >
+            Cancel
+          </Button>
+        </div>
       </form>
     );
   };
@@ -113,7 +157,7 @@ const DisplayGroups = () => {
     }
   }
 
-  return <div>{displayByDisplayingStatus()}</div>;
+  return <div className="main_container">{displayByDisplayingStatus()}</div>;
 };
 
 export default DisplayGroups;

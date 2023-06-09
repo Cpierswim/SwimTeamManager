@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100% - 56px);
+  height: calc(100% - 64px);
 }
 
 .white-label {
@@ -16,8 +16,6 @@
 }
 
 .inputform {
-  width: 55%;
-  height: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,10 +43,6 @@
 }
 .margin-30 {
   width: 80% !important;
-}
-
-.main-grid {
-  height: calc(100% - 56px);
 }
 
 .full-height {

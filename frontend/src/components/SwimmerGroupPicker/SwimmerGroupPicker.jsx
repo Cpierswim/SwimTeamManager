@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import "./SwimmerGroupPicker.css";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
@@ -33,7 +34,13 @@ const SwimmerGroupPicker = ({ swimmer, groups }) => {
   };
 
   return (
-    <>
+    <div className="swimmergrouppicker">
+      <div className="name">
+        {swimmer.preferred_first_name
+          ? swimmer.preferred_first_name
+          : swimmer.first_name}{" "}
+        {swimmer.last_name}:{" "}
+      </div>
       <select
         name={`group_selector${swimmer.id}`}
         id={`group_selector${swimmer.id}`}
@@ -52,11 +59,7 @@ const SwimmerGroupPicker = ({ swimmer, groups }) => {
           );
         })}
       </select>{" "}
-      {swimmer.preferred_first_name
-        ? swimmer.preferred_first_name
-        : swimmer.first_name}{" "}
-      {swimmer.last_name}
-    </>
+    </div>
   );
 };
 

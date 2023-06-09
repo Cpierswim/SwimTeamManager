@@ -4,6 +4,7 @@ import axios from "axios";
 import getTimeString from "../../utils/CustonTime.js";
 import useAuth from "../../hooks/useAuth";
 import "./SwimmerCard.css";
+import { Button } from "@mui/material";
 const BASE_URL = "http://127.0.0.1:5000/api";
 
 const SwimmerCard = ({ swimmer }) => {
@@ -68,22 +69,28 @@ const SwimmerCard = ({ swimmer }) => {
   return (
     <div className="swimmer_card">
       <div className="split_header">
-        <h5>
+        <h3>
           {swimmer.preferred_first_name
             ? swimmer.preferred_first_name
             : swimmer.first_name}{" "}
           {swimmer.last_name}
-        </h5>
-        <p>{swimmer.birthdate}</p>
+        </h3>
+        <p>
+          {swimmer.birthdate}
+          <br />
+          Group: {swimmer.group ? swimmer.group.group_name : "unassigned"}
+        </p>
       </div>
-      <hr />
-      <p>Group: {swimmer.group ? swimmer.group.group_name : "unassigned"}</p>
-      <hr />
+      <div className="swimmer-divider" />
       {displayBestTimes()}
-      <hr />
-      <div className="split_header">
-        <Link to={`/meetsignup?s=${swimmer.id}`}>Sign up for a Meet</Link>
-        <Link to={`/results?s=${swimmer.id}`}>See all results</Link>
+
+      <div className="split_buttons">
+        <Button variant="contained" href={`/meetsignup?s=${swimmer.id}`}>
+          Sign up for a Meet
+        </Button>
+        <Button variant="contained" href={`/results?s=${swimmer.id}`}>
+          See all results
+        </Button>
       </div>
     </div>
   );

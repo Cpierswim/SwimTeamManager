@@ -1,4 +1,4 @@
-ul {
+/* ul {
   display: flex;
   justify-content: space-between;
   list-style-type: none;
@@ -32,4 +32,8 @@ li {
 .brand {
   cursor: pointer;
   font-size: 2rem;
+} */
+
+.forceheight {
+  height: 64px !important;
 }

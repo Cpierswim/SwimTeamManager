@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./RegisterCoachPage.css";
+import { TextField, Button } from "@mui/material";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
@@ -69,63 +71,87 @@ const RegisterCoachPage = () => {
   }, []);
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <h2>Add a coach account</h2>
-      <label>
-        Userame:{" "}
-        <input
-          type="text"
-          required
-          name="username"
-          value={formData.username}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Password:{" "}
-        <input
-          type="text"
-          required
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        First Name:{" "}
-        <input
-          type="text"
-          required
-          name="first_name"
-          value={formData.first_name}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Last Name:{" "}
-        <input
-          type="text"
-          required
-          name="last_name"
-          value={formData.last_name}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        email:{" "}
-        <input
-          type="text"
-          required
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-      </label>
-      <h6>Which groups to coach?</h6>
-      {groups.map((group) => {
-        return (
-          <div key={group.id}>
-            <label>
+    <form className="register_coach_form" onSubmit={handleSubmit}>
+      <h2>Add a Coach Account</h2>
+      <div className="split">
+        <div className="half">
+          <TextField
+            color="primary"
+            fullWidth
+            label="Username"
+            multiline={false}
+            required
+            size="medium"
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+            InputLabelProps={{ className: "white-label" }}
+            inputProps={{ className: "white-text" }}
+          />
+          <TextField
+            color="primary"
+            fullWidth
+            label="Password"
+            multiline={false}
+            required
+            size="medium"
+            name="username"
+            value={formData.password}
+            onChange={handleInputChange}
+            InputLabelProps={{ className: "white-label" }}
+            inputProps={{ className: "white-text" }}
+          />
+
+          <TextField
+            color="primary"
+            fullWidth
+            label="Email"
+            multiline={false}
+            required
+            size="medium"
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            InputLabelProps={{ className: "white-label" }}
+            inputProps={{ className: "white-text" }}
+          />
+        </div>
+        <div className="half">
+          <TextField
+            color="primary"
+            fullWidth
+            label="First Name"
+            multiline={false}
+            required
+            size="medium"
+            name="first_name"
+            value={formData.first_name}
+            onChange={handleInputChange}
+            InputLabelProps={{ className: "white-label" }}
+            inputProps={{ className: "white-text" }}
+          />
+          <TextField
+            color="primary"
+            fullWidth
+            label="Last Name"
+            multiline={false}
+            required
+            size="medium"
+            name="last_name"
+            value={formData.last_name}
+            onChange={handleInputChange}
+            InputLabelProps={{ className: "white-label" }}
+            inputProps={{ className: "white-text" }}
+          />
+        </div>
+      </div>
+
+      <h5 className="group_label">Which groups to coach?</h5>
+      <div className="groups_list">
+        {groups.map((group) => {
+          return (
+            <label key={group.id}>
               <input
                 type="checkbox"
                 value={`${group.id}`}
@@ -135,11 +161,14 @@ const RegisterCoachPage = () => {
               />{" "}
               {group.group_name}
             </label>
-            <br />
-          </div>
-        );
-      })}
-      <button>Sumit</button>
+          );
+        })}
+      </div>
+      <div className="group_label">
+        <Button variant="contained" type="submit">
+          Submit
+        </Button>
+      </div>
     </form>
   );
 };

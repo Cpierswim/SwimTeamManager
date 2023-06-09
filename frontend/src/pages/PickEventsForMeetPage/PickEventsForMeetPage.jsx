@@ -3,6 +3,13 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import SwimmerEventPicker from "../../components/SwimmerEventPicker/SwimmerEventPicker";
 import { Link } from "react-router-dom";
+import "./PickEventsForMeetPage.css";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Button } from "@mui/material";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
@@ -13,6 +20,7 @@ const PickEventsForMeetPage = () => {
   const [meet, setMeet] = useState({});
   const [signedUpSwimmers, setSignedUpSwimmers] = useState([]);
   const [meetEvents, setMeetEvents] = useState([]);
+  const [expanded, setExpanded] = React.useState(false);
 
   useEffect(() => {
     let signups;
@@ -74,25 +82,53 @@ const PickEventsForMeetPage = () => {
     fetchEvents();
   }, []);
 
+  const handleAccordionChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   return (
-    <>
+    <div className="card_for_picking_events_page">
       <h1>Picking Events for: {meet.name}</h1>
-      {signedUpSwimmers.map((swimmer) => {
-        return (
-          <SwimmerEventPicker
-            key={"swmr" + swimmer.id}
-            swimmer={swimmer}
-            meet={meet}
-            meetEvents={meetEvents}
-          />
-        );
-      })}
+      <br />
+      <div className="accordion_container">
+        {signedUpSwimmers.map((swimmer) => {
+          return (
+            <Accordion
+              key={"swmr" + swimmer.id}
+              expanded={expanded === "panel" + swimmer.id}
+              onChange={handleAccordionChange("panel" + swimmer.id)}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  {swimmer.preferred_first_name
+                    ? swimmer.preferred_first_name
+                    : swimmer.first_name}{" "}
+                  {swimmer.last_name}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <SwimmerEventPicker
+                  key={"swmr" + swimmer.id}
+                  swimmer={swimmer}
+                  meet={meet}
+                  meetEvents={meetEvents}
+                />
+              </AccordionDetails>
+            </Accordion>
+          );
+        })}
+      </div>
       <br />
       <br />
-      <p>
-        <Link to={`/relays?m=${meet.id}`}>Pick relays for this meet</Link>
-      </p>
-    </>
+      <Button variant="contained" href={`/relays?m=${meet.id}`}>
+        Pick relays for this meet
+      </Button>
+      {/* <Link to={`/relays?m=${meet.id}`}>Pick relays for this meet</Link> */}
+    </div>
   );
 };
 

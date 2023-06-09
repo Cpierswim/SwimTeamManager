@@ -1,0 +1,75 @@
+.main_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 48%;
+  width: 60%;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+  border-color: rgba(23, 23, 216, 0.5);
+  border-width: 3px;
+  border-radius: 15px;
+  padding-top: 45px;
+  padding-bottom: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  min-height: 400px;
+  max-width: 561px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.group_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.groups_label {
+  text-align: center;
+}
+.indent {
+  text-indent: 50px;
+}
+.add_groups_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.single_line {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8px;
+}
+
+.single_line > label {
+  width: 25%;
+  text-align: right;
+  margin-right: 7px;
+}
+.single_line > input {
+  width: 70%;
+}
+.fullWidth {
+  width: 100%;
+  display: inline;
+}
+.button_row {
+  margin-top: 20px;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
