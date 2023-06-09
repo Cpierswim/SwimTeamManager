@@ -3,6 +3,7 @@ import getTimeString from "../../utils/CustonTime.js";
 import getMillsfromTimeString from "../../utils/ParseTimeString.js";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import "./EventPicker.css";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
@@ -176,34 +177,43 @@ const EventPicker = ({ swimmer, meetEvent, swimmerEntries, bestTimes }) => {
   return (
     <>
       {meetEvent.event_type === 1 ? (
-        <div>
-          #{meetEvent.event_number}{" "}
-          <input
-            type="checkbox"
-            checked={entered}
-            onChange={checkChanged}
-          ></input>
-          {meetEvent.distance} {getStroke(meetEvent.stroke)} Time:{" "}
-          <input
-            type="text"
-            value={time}
-            disabled={!entered}
-            onChange={timeChanged}
-          ></input>
-          {" Bonus:"}
-          <input
-            type="checkbox"
-            disabled={!entered}
-            checked={bonusStatus}
-            onChange={bonusChanged}
-          ></input>
-          {" Exhibition:"}
-          <input
-            type="checkbox"
-            disabled={!entered}
-            checked={exhibitionStatus}
-            onChange={exhibitionChanged}
-          ></input>
+        <div className="event_container">
+          <div>Event #{meetEvent.event_number} </div>
+          <div>
+            <input
+              type="checkbox"
+              checked={entered}
+              onChange={checkChanged}
+            ></input>
+            {meetEvent.distance} {getStroke(meetEvent.stroke)}
+          </div>
+          <div>
+            Time:{" "}
+            <input
+              type="text"
+              value={time}
+              disabled={!entered}
+              onChange={timeChanged}
+            ></input>
+          </div>
+          <div>
+            {" Bonus: "}
+            <input
+              type="checkbox"
+              disabled={!entered}
+              checked={bonusStatus}
+              onChange={bonusChanged}
+            ></input>
+          </div>
+          <div>
+            {" Exhibition: "}
+            <input
+              type="checkbox"
+              disabled={!entered}
+              checked={exhibitionStatus}
+              onChange={exhibitionChanged}
+            ></input>
+          </div>
         </div>
       ) : (
         <div></div>

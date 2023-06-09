@@ -42,13 +42,13 @@ const SwimmerEventPicker = ({ swimmer, meet, meetEvents }) => {
 
   return (
     <>
-      <h3>
+      {/* <h3>
         Events for{" "}
         {swimmer.preferred_first_name
           ? swimmer.preferred_first_name
           : swimmer.first_name}{" "}
         {swimmer.last_name}
-      </h3>
+      </h3> */}
       {meetEvents.map((meetEvent) => {
         return meetEvent.event_type === 1 ? (
           <EventPicker
