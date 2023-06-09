@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import RelayEventPicker from "../../components/RelayEventPicker/RelayEventPicker";
+import "./RelayPickerPage.css";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
@@ -97,7 +98,7 @@ const RelayPickerPage = () => {
   }, []);
 
   return (
-    <>
+    <div className="relayPickingContainer">
       <h1>Picking relays for {meet.name}</h1>
 
       {meetEvents.map((event, index) => {
@@ -110,7 +111,7 @@ const RelayPickerPage = () => {
           />
         );
       })}
-    </>
+    </div>
   );
 };
 

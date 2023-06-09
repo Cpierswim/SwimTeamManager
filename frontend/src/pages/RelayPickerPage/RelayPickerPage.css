@@ -1,0 +1,28 @@
+.relayPickingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  min-width: 60%;
+  max-width: 80%;
+  margin-top: 5% !important;
+  margin-bottom: 5% !important;
+  max-height: calc(90% - 64px);
+  overflow: auto;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+  border-color: rgba(23, 23, 216, 0.5);
+  border-width: 3px;
+  border-radius: 15px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: auto;
+  min-width: 300px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
