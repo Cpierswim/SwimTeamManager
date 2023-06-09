@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: 48%;
+  min-height: 48%;
   width: 60%;
   margin-top: 10%;
   margin-left: auto;
@@ -35,4 +35,41 @@
 
 .groups_label {
   text-align: center;
+}
+.indent {
+  text-indent: 50px;
+}
+.add_groups_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.single_line {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8px;
+}
+
+.single_line > label {
+  width: 25%;
+  text-align: right;
+  margin-right: 7px;
+}
+.single_line > input {
+  width: 70%;
+}
+.fullWidth {
+  width: 100%;
+  display: inline;
+}
+.button_row {
+  margin-top: 20px;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
