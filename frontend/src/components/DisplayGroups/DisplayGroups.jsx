@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import "./DisplayGroups.css";
+import { Button } from "@mui/material";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 const STATUS_DISPLAYING_GROUPS = 1;
@@ -55,21 +57,25 @@ const DisplayGroups = () => {
   const displayGroups = () => {
     return (
       <>
-        {groups.map((group) => {
-          return (
-            <p key={group.id}>
-              {group.group_name} {group.start_time}
-            </p>
-          );
-        })}
+        <h2 className="groups_label">Currently Available Groups</h2>
+        <div className="group_list">
+          {groups.map((group) => {
+            return (
+              <p key={group.id}>
+                {group.group_name} {group.start_time}
+              </p>
+            );
+          })}
+        </div>
         {displayAddGroup && (
-          <button
+          <Button
+            variant="contained"
             onClick={() => {
               setStatus(STATUS_ADDING_GROUPS);
             }}
           >
             Add Group
-          </button>
+          </Button>
         )}
       </>
     );
@@ -113,7 +119,7 @@ const DisplayGroups = () => {
     }
   }
 
-  return <div>{displayByDisplayingStatus()}</div>;
+  return <div className="main_container">{displayByDisplayingStatus()}</div>;
 };
 
 export default DisplayGroups;
