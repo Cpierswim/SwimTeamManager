@@ -1,0 +1,14 @@
+.swimmergrouppicker {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.swimmergrouppicker > div.name {
+  width: 35%;
+  text-align: right;
+}
+.swimmergrouppicker > select {
+  width: 40%;
+}

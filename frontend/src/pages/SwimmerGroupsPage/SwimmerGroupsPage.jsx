@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SwimmerGroupPicker from "../../components/SwimmerGroupPicker/SwimmerGroupPicker";
 import axios from "axios";
+import "./SwimmerGroupsPage.css";
 
 const BASE_URL = "http://127.0.0.1:5000/api";
 
@@ -24,21 +25,20 @@ const SwimmerGroupsPage = () => {
   }, []);
 
   return (
-    <>
+    <div className="card">
       <h3>Assign swimmers to Groups</h3>
       {swimmers.map((swimmer) => {
         return (
-          <div key={swimmer.id}>
+          <div style={{ width: "100%" }} key={swimmer.id}>
             <SwimmerGroupPicker
               key={swimmer.id}
               swimmer={swimmer}
               groups={groups}
             />
-            <br />
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 
