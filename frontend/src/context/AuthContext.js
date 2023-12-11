@@ -22,7 +22,7 @@ function setUserObject(user) {
 }
 
 export const AuthProvider = ({ children }) => {
-  const BASE_URL = "http://127.0.0.1:5000/api/auth";
+  const process.env.BASE_URL = "http://127.0.0.1:5000/api/auth";
   const userToken = JSON.parse(localStorage.getItem("token"));
   const decodedUser = userToken ? jwtDecode(userToken) : null;
   const [token, setToken] = useState(userToken);
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
         swimmers: swimmers,
       };
       // debugger;
-      let response = await axios.post(`${BASE_URL}/register`, finalUserData);
+      let response = await axios.post(`${process.env.BASE_URL}/register`, finalUserData);
       if (response.status === 201) {
         console.log("Successful registration! Log in to access token");
         setIsServerError(false);
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginUser = async (loginData) => {
     try {
-      let response = await axios.post(`${BASE_URL}/login`, loginData);
+      let response = await axios.post(`${process.env.BASE_URL}/login`, loginData);
       if (response.status === 200) {
         localStorage.setItem("token", JSON.stringify(response.data.access));
         setToken(JSON.parse(localStorage.getItem("token")));

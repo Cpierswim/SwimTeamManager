@@ -4,8 +4,6 @@ import getTimeString from "../../utils/CustonTime.js";
 import useAuth from "../../hooks/useAuth";
 import "./ResultsPage.css";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const ResultsPage = () => {
   const [user, token] = useAuth();
   const [results, setResults] = useState([]);
@@ -16,7 +14,7 @@ const ResultsPage = () => {
 
   useEffect(() => {
     const fetchResults = async () => {
-      let url = `${BASE_URL}/result?swimmer_id=${swimmer_id}`;
+      let url = `${process.env.BASE_URL}/result?swimmer_id=${swimmer_id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -27,7 +25,7 @@ const ResultsPage = () => {
     };
 
     const fetchMeets = async () => {
-      let url = `${BASE_URL}/meet?team_id=1`;
+      let url = `${process.env.BASE_URL}/meet?team_id=1`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,

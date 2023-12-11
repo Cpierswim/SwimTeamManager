@@ -5,15 +5,13 @@ import getTimeString from "../../utils/CustonTime.js";
 import useAuth from "../../hooks/useAuth";
 import "./SwimmerCard.css";
 import { Button } from "@mui/material";
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const SwimmerCard = ({ swimmer }) => {
   const [bestTimes, setbestTimes] = useState([]);
   const [user, token] = useAuth();
 
   useEffect(() => {
     const fetchBestTimes = async () => {
-      let url = `${BASE_URL}/besttimes/${swimmer.id}`;
+      let url = `${process.env.BASE_URL}/besttimes/${swimmer.id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,

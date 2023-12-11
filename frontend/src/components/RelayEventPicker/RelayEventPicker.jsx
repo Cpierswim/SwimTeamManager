@@ -5,8 +5,6 @@ import useAuth from "../../hooks/useAuth";
 import "./RelayEventPicker.css";
 import { Button } from "@mui/material";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const RelayEventPicker = ({ enteredSwimmers, relayEvent, bestTimes }) => {
   const [user, token] = useAuth();
   const [bestTimeDistance, setBestTimeDistance] = useState(
@@ -156,7 +154,7 @@ const RelayEventPicker = ({ enteredSwimmers, relayEvent, bestTimes }) => {
 
   async function enterRelay(swimmers) {
     // debugger;
-    let url = `${BASE_URL}/relay`;
+    let url = `${process.env.BASE_URL}/relay`;
     let config = {
       headers: {
         Authorization: "Bearer " + token,
@@ -177,7 +175,7 @@ const RelayEventPicker = ({ enteredSwimmers, relayEvent, bestTimes }) => {
     let relay_response = await axios.post(url, relay_data, config);
     let relay = relay_response.data;
     let relay_id = relay.id;
-    url = `${BASE_URL}/entryworkaround`; //CORS Problem if I don't do this
+    url = `${process.env.BASE_URL}/entryworkaround`; //CORS Problem if I don't do this
     // let config = {
     //   headers: {
     //     // Authorization: "Bearer " + token,

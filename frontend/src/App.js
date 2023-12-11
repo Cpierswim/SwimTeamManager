@@ -3,18 +3,23 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 // Pages Imports
-import HomePage from "./pages/HomePage/HomePage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import RegisterCoachPage from "./pages/RegisterCoachPage/RegisterCoachPage";
-import GroupsPage from "./pages/GroupsPage/GroupsPage";
-import SwimmerGroupsPage from "./pages/SwimmerGroupsPage/SwimmerGroupsPage";
-import MapPage from "./pages/MapPage/MapPage";
-import MeetSignupPage from "./pages/MeetSignupPage/MeetSignupPage";
-import ResultsPage from "./pages/ResultsPage/ResultsPage";
-import PickEventsPage from "./pages/PickEventsPage/PickEventsPage";
-import PickEventsForMeetPage from "./pages/PickEventsForMeetPage/PickEventsForMeetPage";
-import RelayPickerPage from "./pages/RelayPickerPage/RelayPickerPage";
+import {
+  GroupsPage, 
+  HomePage, 
+  LoginPage,
+  MapPage,
+  MeetSignupPage,
+  PickEventsForMeetPage,
+  RegisterCoachPage,
+  RegisterPage,
+  RelayPickerPage,
+  ResultsPage,
+  SwimmerGroupsPage,
+  TestPage
+} from "./pages"
+// ^^ this is more stylistic but also just more representative of exactly
+// what's happening.. see the pages/index.js for how the export is done from
+// there. You could do the same thing with components, hooks, utils.. just cleaner
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";

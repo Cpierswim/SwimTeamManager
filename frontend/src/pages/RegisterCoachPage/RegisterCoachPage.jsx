@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import "./RegisterCoachPage.css";
 import { TextField, Button } from "@mui/material";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const COACH_TYPE = 2;
 
 const RegisterCoachPage = () => {
@@ -44,7 +42,7 @@ const RegisterCoachPage = () => {
       }
       final_data.groups = groups;
       console.log(final_data);
-      let response = await axios.post(`${BASE_URL}/auth/register`, final_data);
+      let response = await axios.post(`${process.env.BASE_URL}/auth/register`, final_data);
       if (response.status === 201) {
         console.log("Successful registration! Log in to access token");
         navigate("/");
@@ -58,7 +56,7 @@ const RegisterCoachPage = () => {
 
   useEffect(() => {
     const fetchGroups = async () => {
-      let url = `${BASE_URL}/groups?team_id=1/`;
+      let url = `${process.env.BASE_URL}/groups?team_id=1/`;
       let response = await axios.get(url);
       let temp = response.data;
       for (let i = 0; i < temp.length; i++) {

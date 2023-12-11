@@ -5,15 +5,13 @@ import axios from "axios";
 import "./PickEventsPage.css";
 import { Button } from "@mui/material";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const PickEventsPage = () => {
   const [meets, setMeets] = useState([]);
   const [user, token] = useAuth();
 
   useEffect(() => {
     const fetchMeets = async () => {
-      let url = `${BASE_URL}/meet?team_id=1`;
+      let url = `${process.env.BASE_URL}/meet?team_id=1`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,

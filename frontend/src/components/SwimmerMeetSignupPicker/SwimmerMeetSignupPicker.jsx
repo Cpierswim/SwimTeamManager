@@ -4,8 +4,6 @@ import useAuth from "../../hooks/useAuth";
 import Address from "../Address/Address";
 import "./SwimmerMeetSignupPicker.css";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const SwimmerMeetSignupPicker = ({
   swimmer,
   meet,
@@ -24,7 +22,7 @@ const SwimmerMeetSignupPicker = ({
   async function selectChanged(e) {
     let value = e.target.value;
     if (value === "Y") {
-      let url = `${BASE_URL}/signups`;
+      let url = `${process.env.BASE_URL}/signups`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -36,7 +34,7 @@ const SwimmerMeetSignupPicker = ({
       };
       let response = await axios.post(url, data, config);
     } else {
-      let url = `${BASE_URL}/signups/${swimmer.id}/${meet.id}`;
+      let url = `${process.env.BASE_URL}/signups/${swimmer.id}/${meet.id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -45,7 +43,7 @@ const SwimmerMeetSignupPicker = ({
       let response = await axios.delete(url, config);
     }
 
-    let url = `${BASE_URL}/signups/${swimmer.id}`;
+    let url = `${process.env.BASE_URL}/signups/${swimmer.id}`;
     let config = {
       headers: {
         Authorization: "Bearer " + token,

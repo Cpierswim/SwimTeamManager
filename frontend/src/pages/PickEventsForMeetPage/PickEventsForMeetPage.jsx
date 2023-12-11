@@ -11,8 +11,6 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Button } from "@mui/material";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const PickEventsForMeetPage = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const meet_id = queryParameters.get("m");
@@ -25,7 +23,7 @@ const PickEventsForMeetPage = () => {
   useEffect(() => {
     let signups;
     const fetchMeet = async () => {
-      let url = `${BASE_URL}/meet/${meet_id}`;
+      let url = `${process.env.BASE_URL}/meet/${meet_id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -37,7 +35,7 @@ const PickEventsForMeetPage = () => {
       //   console.log(meet);
     };
     const fetchSignUps = async () => {
-      let url = `${BASE_URL}/signupsbymeet/${meet_id}`;
+      let url = `${process.env.BASE_URL}/signupsbymeet/${meet_id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -49,7 +47,7 @@ const PickEventsForMeetPage = () => {
       //   console.log(response.data);
     };
     const fetchSignedUpSwimmers = async () => {
-      let url = `${BASE_URL}/swimmer?team_id=1`;
+      let url = `${process.env.BASE_URL}/swimmer?team_id=1`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -66,7 +64,7 @@ const PickEventsForMeetPage = () => {
       setSignedUpSwimmers(swimmers);
     };
     const fetchEvents = async () => {
-      let url = `${BASE_URL}/meetevent?meet_id=${meet_id}`;
+      let url = `${process.env.BASE_URL}/meetevent?meet_id=${meet_id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,

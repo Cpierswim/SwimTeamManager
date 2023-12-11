@@ -4,8 +4,6 @@ import axios from "axios";
 import RelayEventPicker from "../../components/RelayEventPicker/RelayEventPicker";
 import "./RelayPickerPage.css";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const RelayPickerPage = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const meet_id = queryParameters.get("m");
@@ -18,7 +16,7 @@ const RelayPickerPage = () => {
   useEffect(() => {
     let signups;
     const fetchMeet = async () => {
-      let url = `${BASE_URL}/meet/${meet_id}`;
+      let url = `${process.env.BASE_URL}/meet/${meet_id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -30,7 +28,7 @@ const RelayPickerPage = () => {
       //   console.log(meet);
     };
     const fetchSignUps = async () => {
-      let url = `${BASE_URL}/signupsbymeet/${meet_id}`;
+      let url = `${process.env.BASE_URL}/signupsbymeet/${meet_id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -42,7 +40,7 @@ const RelayPickerPage = () => {
       //   console.log(response.data);
     };
     const fetchSignedUpSwimmers = async () => {
-      let url = `${BASE_URL}/swimmer?team_id=1`;
+      let url = `${process.env.BASE_URL}/swimmer?team_id=1`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -59,7 +57,7 @@ const RelayPickerPage = () => {
       setSignedUpSwimmers(swimmers);
     };
     const fetchEvents = async () => {
-      let url = `${BASE_URL}/meetevent?meet_id=${meet_id}`;
+      let url = `${process.env.BASE_URL}/meetevent?meet_id=${meet_id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -72,7 +70,7 @@ const RelayPickerPage = () => {
       setMeetEvents(events);
     };
     const fetchTeamBestTimes = async () => {
-      let url = `${BASE_URL}/besttimes?team_id=1`;
+      let url = `${process.env.BASE_URL}/besttimes?team_id=1`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,

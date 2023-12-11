@@ -4,8 +4,6 @@ import "./MapPage.css";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import { GOOGLE_MAPS_API_KEY } from "../../utils/Keys/keys.js";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const MapPage = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAPS_API_KEY,
@@ -15,7 +13,7 @@ const MapPage = () => {
 
   useEffect(() => {
     const fetchAddresses = async () => {
-      let url = `${BASE_URL}/swimmer?team_id=1/`;
+      let url = `${process.env.BASE_URL}/swimmer?team_id=1/`;
       let response = await axios.get(url);
       let swimmers = response.data;
       let temp_marker_locations = [];

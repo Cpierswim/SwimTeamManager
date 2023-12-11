@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import "./AddGroup.css";
-const BASE_URL = "http://127.0.0.1:5000/api";
 
 const AddGroup = ({ makeGroupAPICall }) => {
   const [newGroupName, setNewGroupName] = useState("");
@@ -10,7 +9,7 @@ const AddGroup = ({ makeGroupAPICall }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let url = `${BASE_URL}/groups/`;
+    let url = `${process.env.BASE_URL}/groups/`;
     new_group = {
       group_name: newGroupName,
       team_id: 1, //should be set programmatically in the future

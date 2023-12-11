@@ -11,6 +11,8 @@ const getTimeString = (time_in_mills) => {
     minutes > 0 && seconds < 10 ? `0${seconds}` : seconds.toString();
   let hundredths_string =
     hundredths < 10 ? `:0${hundredths}` : `:${hundredths}`;
+  // this doesn't return anything? does it work by a side effect of hundreds_string
+  // being returned? you should return explicitly anyway :)
 };
 
 const TimeDisplayer = ({ time, meet_name }) => {
