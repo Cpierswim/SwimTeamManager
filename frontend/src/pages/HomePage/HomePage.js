@@ -13,14 +13,14 @@ const HomePage = () => {
   const [parents, setParents] = useState([]);
   const [swimmers, setSwimmers] = useState([]);
   const [coach, setCoach] = useState({});
-  const BASE_URL = "http://127.0.0.1:5000/api";
+  const process.env.BASE_URL = "http://127.0.0.1:5000/api";
   const PARENT_TYPE = 1;
   const COACH_TYPE = 2;
 
   useEffect(() => {
     const fetchFamily = async () => {
       if (user.type === PARENT_TYPE) {
-        let url = `${BASE_URL}/family?family_id=${user.family_id}/`;
+        let url = `${process.env.BASE_URL}/family?family_id=${user.family_id}/`;
         let response = await axios.get(
           url
           // {
@@ -32,7 +32,7 @@ const HomePage = () => {
         setParents(response.data.parents);
         setSwimmers(response.data.swimmers);
       } else if (user.type === COACH_TYPE) {
-        let url = `${BASE_URL}/coach/${user.coach_id}`;
+        let url = `${process.env.BASE_URL}/coach/${user.coach_id}`;
         let response = await axios.get(url);
         setCoach(response.data);
       }

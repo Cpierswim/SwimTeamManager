@@ -5,8 +5,6 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import "./EventPicker.css";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const EventPicker = ({ swimmer, meetEvent, swimmerEntries, bestTimes }) => {
   const [entered, setEntered] = useState(false);
   const [bonusStatus, setBonusStatus] = useState(false);
@@ -32,7 +30,7 @@ const EventPicker = ({ swimmer, meetEvent, swimmerEntries, bestTimes }) => {
 
     // THE ABOVE DOESN"T WORK DUE TO CHILDREN BEING REDERED BEFORE PARENTS
     const isEnteredInThisEvent = async () => {
-      let url = `${BASE_URL}/entry?swimmer_id=${swimmer.id}&event_id=${meetEvent.id}`;
+      let url = `${process.env.BASE_URL}/entry?swimmer_id=${swimmer.id}&event_id=${meetEvent.id}`;
       //   let config = {
       //     headers: {
       //       Authorization: "Bearer " + token,
@@ -101,7 +99,7 @@ const EventPicker = ({ swimmer, meetEvent, swimmerEntries, bestTimes }) => {
   }
 
   async function createInitialEntryInDataBase(time) {
-    let url = `${BASE_URL}/entryworkaround`; //CORS Problem if I don't do this
+    let url = `${process.env.BASE_URL}/entryworkaround`; //CORS Problem if I don't do this
     // let config = {
     //   headers: {
     //     // Authorization: "Bearer " + token,
@@ -122,7 +120,7 @@ const EventPicker = ({ swimmer, meetEvent, swimmerEntries, bestTimes }) => {
   }
 
   async function deleteEntry(entry_id) {
-    let url = `${BASE_URL}/entry/${entry_id}`;
+    let url = `${process.env.BASE_URL}/entry/${entry_id}`;
     let config = {
       headers: {
         Authorization: "Bearer " + token,
@@ -152,7 +150,7 @@ const EventPicker = ({ swimmer, meetEvent, swimmerEntries, bestTimes }) => {
 
   async function updateEntry(data) {
     debugger;
-    let url = `${BASE_URL}/entry/${entry.id}`;
+    let url = `${process.env.BASE_URL}/entry/${entry.id}`;
     let config = {
       headers: {
         Authorization: "Bearer " + token,

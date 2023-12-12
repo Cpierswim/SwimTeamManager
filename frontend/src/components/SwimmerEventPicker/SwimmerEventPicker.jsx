@@ -3,8 +3,6 @@ import EventPicker from "../EventPicker/EventPicker";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const SwimmerEventPicker = ({ swimmer, meet, meetEvents }) => {
   const [entries, setEntries] = useState([]);
   const [user, token] = useAuth();
@@ -12,7 +10,7 @@ const SwimmerEventPicker = ({ swimmer, meet, meetEvents }) => {
 
   useEffect(() => {
     const fetchEntries = async () => {
-      let url = `${BASE_URL}/entry?swimmer_id=${swimmer.id}`;
+      let url = `${process.env.BASE_URL}/entry?swimmer_id=${swimmer.id}`;
       //   let config = {
       //     headers: {
       //       Authorization: "Bearer " + token,
@@ -26,7 +24,7 @@ const SwimmerEventPicker = ({ swimmer, meet, meetEvents }) => {
     };
 
     const fetchBestTimes = async () => {
-      let url = `${BASE_URL}/besttimes/${swimmer.id}`;
+      let url = `${process.env.BASE_URL}/besttimes/${swimmer.id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,

@@ -3,8 +3,6 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import "./SwimmerGroupPicker.css";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const SwimmerGroupPicker = ({ swimmer, groups }) => {
   const [group, setGroup] = useState(swimmer.group_id);
   const [user, token] = useAuth();
@@ -15,7 +13,7 @@ const SwimmerGroupPicker = ({ swimmer, groups }) => {
 
   const updateGroup = async (test_group) => {
     if (test_group != swimmer.group_id) {
-      let url = `${BASE_URL}/swimmer/${swimmer.id}`;
+      let url = `${process.env.BASE_URL}/swimmer/${swimmer.id}`;
       let data;
       if (test_group !== "-1") data = { group_id: test_group };
       else data = { group_id: null };

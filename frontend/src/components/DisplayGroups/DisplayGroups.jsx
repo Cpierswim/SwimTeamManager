@@ -4,7 +4,6 @@ import axios from "axios";
 import "./DisplayGroups.css";
 import { Button } from "@mui/material";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
 const STATUS_DISPLAYING_GROUPS = 1;
 const STATUS_ADDING_GROUPS = 2;
 
@@ -18,13 +17,13 @@ const DisplayGroups = () => {
   const [coach, setCoach] = useState({});
 
   const fetchGroups = async () => {
-    let url = `${BASE_URL}/groups?team_id=1/`;
+    let url = `${process.env.BASE_URL}/groups?team_id=1/`;
     let response = await axios.get(url);
     setGroups(response.data);
   };
 
   const fetchCoach = async () => {
-    let url = `${BASE_URL}/coach/${user.coach_id}`;
+    let url = `${process.env.BASE_URL}/coach/${user.coach_id}`;
     let response = await axios.get(url);
     setCoach(response.data);
     if (response.data.isHeadCoach) setdisplayAddGroup(true);
@@ -37,7 +36,7 @@ const DisplayGroups = () => {
 
   const addNewGroup = async (e) => {
     e.preventDefault();
-    let url = `${BASE_URL}/groups`;
+    let url = `${process.env.BASE_URL}/groups`;
     let data = {
       group_name: newGroupName,
       team_id: 1,

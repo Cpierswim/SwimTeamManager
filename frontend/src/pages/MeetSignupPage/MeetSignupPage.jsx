@@ -3,8 +3,6 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import "./MeetSignupPage.css";
 import SwimmerMeetSignupPicker from "../../components/SwimmerMeetSignupPicker/SwimmerMeetSignupPicker";
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const MeetSignupPage = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const swimmer_id = queryParameters.get("s");
@@ -17,7 +15,7 @@ const MeetSignupPage = () => {
   useEffect(() => {
     let swimmer;
     const fetchSwimmer = async () => {
-      let url = `${BASE_URL}/swimmer/${swimmer_id}`;
+      let url = `${process.env.BASE_URL}/swimmer/${swimmer_id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -29,7 +27,7 @@ const MeetSignupPage = () => {
       setSwimmer(swimmer);
     };
     const fetchMeets = async () => {
-      let url = `${BASE_URL}/meet?team_id=1`;
+      let url = `${process.env.BASE_URL}/meet?team_id=1`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -40,7 +38,7 @@ const MeetSignupPage = () => {
       setMeets(meets);
     };
     const fetchMeetsRegisteredFor = async () => {
-      let url = `${BASE_URL}/signups/${swimmer_id}`;
+      let url = `${process.env.BASE_URL}/signups/${swimmer_id}`;
       let config = {
         headers: {
           Authorization: "Bearer " + token,

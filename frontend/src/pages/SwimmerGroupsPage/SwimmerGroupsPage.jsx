@@ -3,20 +3,18 @@ import SwimmerGroupPicker from "../../components/SwimmerGroupPicker/SwimmerGroup
 import axios from "axios";
 import "./SwimmerGroupsPage.css";
 
-const BASE_URL = "http://127.0.0.1:5000/api";
-
 const SwimmerGroupsPage = () => {
   const [swimmers, setSwimmers] = useState([]);
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
     const fetchSwimmers = async () => {
-      let url = `${BASE_URL}/swimmer?team_id=1`;
+      let url = `${process.env.BASE_URL}/swimmer?team_id=1`;
       let response = await axios.get(url);
       setSwimmers(response.data);
     };
     const fetchGroups = async () => {
-      let url = `${BASE_URL}/groups?team_id=1/`;
+      let url = `${process.env.BASE_URL}/groups?team_id=1/`;
       let response = await axios.get(url);
       setGroups(response.data);
     };
